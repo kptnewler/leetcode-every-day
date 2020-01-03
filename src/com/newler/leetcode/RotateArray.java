@@ -1,6 +1,7 @@
-package com.newler;
+package com.newler.leetcode;
+// [189]、Rotate Array
 
-//给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+//给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。 
 //
 // 示例 1: 
 //
@@ -28,11 +29,9 @@ package com.newler;
 // 
 // Related Topics 数组
 
-
 import java.util.Arrays;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class RotateArray {
+public class RotateArray{
     public static void main(String[] args) {
         int nums[] = {1,2,3,4,5,6,7};
         rotate(nums, 3);
@@ -84,4 +83,4 @@ class RotateArray {
         }
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+
