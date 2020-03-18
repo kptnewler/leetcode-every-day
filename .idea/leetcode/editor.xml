@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LeetcodeEditor">
+    <option name="projectConfig">
+      <map>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/AnimalShelterLcci.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/AnimalShelterLcci.java" />
+              <option name="questionId" value="100228" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/BestTimeToBuyAndSellStock.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/BestTimeToBuyAndSellStock.java" />
+              <option name="questionId" value="121" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/DailyTemperatures.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/DailyTemperatures.java" />
+              <option name="questionId" value="739" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/DecodeString.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/DecodeString.java" />
+              <option name="questionId" value="394" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/DesignCircularQueue.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/DesignCircularQueue.java" />
+              <option name="questionId" value="860" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ImplementStackUsingQueues.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ImplementStackUsingQueues.java" />
+              <option name="questionId" value="225" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MaxAreaOfIsland.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MaxAreaOfIsland.java" />
+              <option name="questionId" value="695" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MaximalRectangle.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MaximalRectangle.java" />
+              <option name="questionId" value="85" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MinStack.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MinStack.java" />
+              <option name="questionId" value="155" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MissingNumber.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MissingNumber.java" />
+              <option name="questionId" value="268" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/NextGreaterElementI.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/NextGreaterElementI.java" />
+              <option name="questionId" value="496" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/NextGreaterElementIi.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/NextGreaterElementIi.java" />
+              <option name="questionId" value="503" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SlidingWindowMaximum.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SlidingWindowMaximum.java" />
+              <option name="questionId" value="239" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SortOfStacksLcci.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SortOfStacksLcci.java" />
+              <option name="questionId" value="100173" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/Subsets.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/Subsets.java" />
+              <option name="questionId" value="78" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/TaskScheduler.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/TaskScheduler.java" />
+              <option name="questionId" value="621" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/TrappingRainWater.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/TrappingRainWater.java" />
+              <option name="questionId" value="42" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/YongLiangGeZhanShiXianDuiLieLcof.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/YongLiangGeZhanShiXianDuiLieLcof.java" />
+              <option name="questionId" value="100273" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
