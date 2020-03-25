@@ -28,8 +28,13 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class LongestPalindrome {
+    public static void main(String[] args) {
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.longestPalindrome("abccccdd"));
+    }
+
     /**
-     * 解法1：回文字符成立条件是，成双成对，如果字符数量为偶数就添加到回文串中，使用hashMap解法
+     * 解法1：回文字符成立条件是，成双成对，如果字符数量为偶数就添加到回文串中，使用hashMap数据结构解法
      */
     class Solution {
         public int longestPalindrome(String s) {
@@ -46,6 +51,31 @@ public class LongestPalindrome {
                     }
                 } else {
                     map.put(s.charAt(i), 1);
+                }
+            }
+
+            // 还可以单独添加一个字符例如aabaa
+            if (sum < s.length()) return sum+1;
+
+            return sum;
+        }
+    }
+
+    /**
+     * 解法二，使用数组，保存次数，内存占用比hashmap要小
+     * 如果是int-int可以使用数组来解决，执行效率高于HashMap
+     */
+    static class Solution2 {
+        public int longestPalindrome(String s) {
+            if (s == null || s.length() == 0) return 0;
+            int[] charCounts = new int[59];
+            int sum = 0;
+            for (int i = 0; i < s.length(); i++) {
+                int index = s.charAt(i) - 65;
+                charCounts[index] += 1;
+                if (charCounts[index] == 2) {
+                    sum += 2;
+                    charCounts[index] = 0;
                 }
             }
 
