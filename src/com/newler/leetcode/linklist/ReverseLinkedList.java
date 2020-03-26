@@ -15,10 +15,18 @@ package com.newler.leetcode.linklist;
 
 import com.newler.leetcode.data.ListNode;
 
+import java.util.List;
+
 public class ReverseLinkedList {
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
+
+    public static void main(String[] args) {
+        int nums[] = {1,2,3,4,5};
+        Solution2 solution = new Solution2();
+        solution.reverseList(new ListNode(nums));
+    }
 
     /**
      * 整个思路如1->2->3->4->5
@@ -44,5 +52,28 @@ public class ReverseLinkedList {
             return head;
         }
     }
+
+     static class Solution2 {
+        /**
+         * 当前节点的next指向前一个节点，以此类推
+         */
+         public ListNode reverseList(ListNode head) {
+             if (head == null) return null;
+             ListNode cur = head;
+             ListNode pre = null;
+             while (cur != null) {
+                 // 先获取下一个节点，防止被覆盖
+                 ListNode next = cur.next;
+                 // 当前节点的next指向前一个节点
+                 cur.next = pre;
+                 // 前一个节点后移
+                 pre = cur;
+                 // 当前节点后移
+                 cur = next;
+             }
+
+             return pre;
+         }
+     }
 }
 
