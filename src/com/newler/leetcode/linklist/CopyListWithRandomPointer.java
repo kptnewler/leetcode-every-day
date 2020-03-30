@@ -64,9 +64,6 @@ import java.util.Map;
 
 public class CopyListWithRandomPointer {
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-
     class Node {
         int val;
         Node next;
