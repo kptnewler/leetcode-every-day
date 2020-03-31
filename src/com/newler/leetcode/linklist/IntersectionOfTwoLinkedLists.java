@@ -1,6 +1,6 @@
-package com.newler.leetcode.editor.cn;
+package com.newler.leetcode.linklist;
 // [160]、相交链表
-// ${DATE}
+// 2020年3月30日09:41:40
 //编写一个程序，找到两个单链表相交的起始节点。 
 //
 // 如下面的两个链表： 
@@ -63,6 +63,9 @@ package com.newler.leetcode.editor.cn;
 
 import com.newler.leetcode.data.ListNode;
 
+/**
+ * 这题相交表示节点相交，相交的节点相同，并不是单单值相同
+ */
 public class IntersectionOfTwoLinkedLists {
 
     public static void main(String[] args) {
@@ -76,6 +79,14 @@ public class IntersectionOfTwoLinkedLists {
         solution.getIntersectionNode(listNodeA, listNodeB);
     }
 
+    /**
+     * 解法1：计算出A，B节点各自的长度lenA，lenB，让长链表先走abs(lenA-lenB)，使A，B链表处于同一起点，然后遍历，如果出现curA=curB
+     * 说明有相交节点
+     * a1->a2->a3->a4
+     *             -> ab1->ab2-ab3
+     * b1->b2->b4
+     * 先让a节点先走1步到达a2，然后A和B节点同时遍历
+     */
     public static class Solution {
 
         public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
@@ -118,7 +129,24 @@ public class IntersectionOfTwoLinkedLists {
             return null;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    /**
+     * 解法二:更妙
+     * 如果长度A，B链表长度不相等
+     * 走一个循环，A+B = B+A， 总长度相同，如果相交最终肯定能找到相交节点
+     * a1->a2->a3               b1->b2
+     *           -> ab1 -> ab2              -> ab1 -> ab2
+     * b1->b2                   a1->a2->a3
+     */
+    class Solution2 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode curA = headA, curB = headB;
+            while (curA != curB) {
+                curA = curA == null ? headB : curA.next;
+                curB = curB == null ? headA : curB.next;
+            }
+            return curA;
+        }
+    }
 }
 
