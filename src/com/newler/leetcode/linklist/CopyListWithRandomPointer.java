@@ -67,7 +67,7 @@ public class CopyListWithRandomPointer {
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-    class Node {
+    static class Node {
         int val;
         Node next;
         Node random;
@@ -79,6 +79,25 @@ public class CopyListWithRandomPointer {
         }
     }
 
+
+    public static void main(String[] args) {
+        Node node1 = new Node(7);
+        Node node2 = new Node(13);
+        Node node3 = new Node(11);
+        Node node4 = new Node(10);
+        Node node5 = new Node(1);
+        node1.next = node2;
+        node1.random = null;
+        node2.next = node3;
+        node2.random = null;
+        node3.next = node4;
+        node3.random = null;
+        node4.next = node5;
+        node4.random = null;
+
+        Solution2 solution2 = new Solution2();
+        solution2.copyRandomList(node1);
+    }
 
     class Solution {
         public Node copyRandomList(Node head) {
@@ -103,6 +122,41 @@ public class CopyListWithRandomPointer {
             }
 
             return copyNodeMap.get(head);
+        }
+    }
+
+    static class Solution2 {
+        public Node copyRandomList(Node head) {
+            if (head == null) return null;
+            Node cur = head;
+            Node next;
+            // 把复制连接插入到cur和next之间，如1->2->3 变成1->1'->2->2'->3'->3
+            while (cur != null) {
+                next = cur.next;
+                cur.next = new Node(cur.val);
+                cur.next.next = next;
+                cur = next;
+            }
+
+            Node copyCur = null;
+            cur = head;
+            while (cur != null) {
+                copyCur = cur.next;
+                copyCur.random = cur.random == null ? null : cur.random.next;
+                cur = cur.next.next;
+            }
+
+            cur = head;
+            Node res = head.next;
+            while (cur != null) {
+                next = cur.next.next;
+                copyCur = cur.next;
+                cur.next = next;
+                copyCur.next = next == null ? null : next.next;
+                cur = next;
+            }
+
+            return res;
         }
     }
 }
