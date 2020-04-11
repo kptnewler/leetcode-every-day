@@ -1,6 +1,6 @@
 package com.newler.leetcode.linklist;
 // [142]、环形链表 II
-// ${DATE}
+// 2020年4月2日09:22:17
 //给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。 
 //
 // 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。 
@@ -46,9 +46,36 @@ package com.newler.leetcode.linklist;
 import com.newler.leetcode.data.ListNode;
 
 public class LinkedListCycleIi {
-    public class Solution {
+    public static void main(String[] args) {
+        int nums[] = {1,2};
+        ListNode listNode = new ListNode(nums);
+        listNode.next.next = listNode;
+        Solution solution = new Solution();
+        solution.detectCycle(listNode);
+    }
+    public static class Solution {
         public ListNode detectCycle(ListNode head) {
+            if (head == null || head.next == null) return null;
+            ListNode fast = head, slow = head;
+            while (fast != null && fast.next != null) {
+                fast = fast.next.next;
+                slow = slow.next;
 
+                if (fast == slow) {
+                   fast = head;
+                   break;
+                }
+            }
+
+            while (fast != null && slow != null) {
+                if (fast == slow) {
+                    return fast;
+                }
+
+                fast = fast.next;
+                slow = slow.next;
+            }
+            return null;
         }
     }
 }

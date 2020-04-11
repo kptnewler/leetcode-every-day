@@ -49,19 +49,35 @@ public class LinkedListCycle {
     public class Solution {
         public boolean hasCycle(ListNode head) {
             if (head == null) return false;
-            ListNode fast = head, slow = head;
 
-            while (slow != null && fast.next != null) {
+            ListNode fast = head.next, slow = head;
+
+            while (fast != slow) {
+                if (fast == null || fast.next == null || slow == null) {
+                    return false;
+                }
                 fast = fast.next.next;
                 slow = slow.next;
-
-                if (slow == fast) {
-                    return true;
-                }
             }
-            return false;
+            return true;
         }
     }
 
+    public class Solution2 {
+        public boolean hasCycle(ListNode head) {
+            if (head == null) return false;
+
+            ListNode fast = head, slow = head;
+
+            while (fast != null && fast.next != null) {
+                fast = fast.next.next;
+                slow = slow.next;
+
+                if (fast == slow) return true;
+            }
+
+            return false;
+        }
+    }
 }
 
