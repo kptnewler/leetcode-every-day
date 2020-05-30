@@ -21,9 +21,9 @@ import java.util.Arrays;
 
 public class MoveZeroes {
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        Solution2 solution = new Solution2();
 
-        int nums[] = {1,0};
+        int nums[] = {1,3,12,0,0};
         solution.moveZeroes(nums);
         Arrays.stream(nums).forEach(System.out::println);
     }

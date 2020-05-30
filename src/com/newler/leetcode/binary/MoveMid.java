@@ -1,4 +1,4 @@
-package com.newler.leetcode.linklist;
+package com.newler.leetcode.binary;
 
 public class MoveMid {
     static class Solution {
