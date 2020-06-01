@@ -32,15 +32,12 @@ class Solution {
     public int maxArea(int[] height) {
         int left = 0;
         int right = height.length-1;
-        int max = Integer.MIN_VALUE;
+        int max = 0;
         while (left < right) {
-            max = Math.max(Math.min(height[left], height[right]) * (right-left), max);
             // 移动高度比较低的指针，因为木桶效应，面积取决最短的那个，所以移动去提高短板
-            if (height[left] < height[right]) {
-                left++;
-            } else {
-                right--;
-            }
+            int w = right-left;
+            int h = height[left] < height[right] ? height[left++] : height[right--];
+            max = Math.max( h * w, max);
         }
         return max;
     }
