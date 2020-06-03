@@ -17,8 +17,6 @@ package com.newler.leetcode.array;
 // Related Topics 数组 哈希表
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 /**
