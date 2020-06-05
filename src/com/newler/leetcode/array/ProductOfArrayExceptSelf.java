@@ -24,37 +24,55 @@ package com.newler.leetcode.array;
 
 import java.util.Arrays;
 
-public class ProductOfArrayExceptSelf{
+public class ProductOfArrayExceptSelf {
     public static void main(String[] args) {
-        int nums[] = {1,2,3,1};
+        int nums[] = {1, 2, 3, 1};
         Solution solution = new Solution();
         int[] ints = solution.productExceptSelf(nums);
         Arrays.stream(ints).forEach(System.out::println);
     }
-static class Solution {
-    public int[] productExceptSelf(int[] nums) {
-        int[] suffix = new int[nums.length];
-        int[] prefix = new int[nums.length];
-        int[] results = new int[nums.length];
-        prefix[0] = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            prefix[i] = nums[i] * prefix[i-1];
-        }
-        suffix[nums.length-1] = nums[nums.length-1];
-        for (int i = nums.length - 2; i >= 0; i--) {
-            suffix[i] = suffix[i+1] * nums[i];
-        }
 
-        for (int i = 1; i < nums.length-1; i++) {
-            results[i] =  prefix[i-1] * suffix[i+1];
-        }
-        results[0] = suffix[1];
+    static class Solution {
+        public int[] productExceptSelf(int[] nums) {
+            int[] suffix = new int[nums.length];
+            int[] prefix = new int[nums.length];
+            int[] results = new int[nums.length];
+            prefix[0] = 1;
+            for (int i = 1; i < nums.length; i++) {
+                prefix[i] = nums[i-1] * prefix[i - 1];
+            }
+            suffix[nums.length - 1] = 1;
+            for (int i = nums.length - 2; i >= 0; i--) {
+                suffix[i] = suffix[i + 1] * nums[i+1];
+            }
 
-        results[nums.length-1] = prefix[nums.length-2];
-        return results;
+            for (int i = 1; i < nums.length - 1; i++) {
+                results[i] = prefix[i] * suffix[i];
+            }
+
+            return results;
+        }
     }
-}
-//leetcode submit region end(Prohibit modification and deletion)
 
+
+    class Solution2 {
+        public int[] productExceptSelf(int[] nums) {
+            int[] results = new int[nums.length];
+
+            int k = 1;
+            for (int i = 0; i < nums.length; i++) {
+                // 始终保存nums[i] 左边的乘积
+                results[i] = k;
+                k *= nums[i];
+            }
+
+            k = 1;
+            for (int i = nums.length - 1; i >= 0; i--) {
+                results[i] *= k;
+                k *= nums[i];
+            }
+            return results;
+        }
+    }
 }
 
