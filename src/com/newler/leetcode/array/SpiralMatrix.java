@@ -1,6 +1,6 @@
 package com.newler.leetcode.array;
 // [54]、螺旋矩阵
-// ${DATE}
+// 2020年6月5日22:22:57
 //给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。 
 //
 // 示例 1: 
@@ -32,41 +32,38 @@ import java.util.List;
 
 public class SpiralMatrix {
     public static void main(String[] args) {
-        int[][] matrix = {{1,2,3}, {4,5,6}, {7,8,9}};
+        int[][] matrix = {{1,2,3}, {4,5,6}, {7,8,9}, {10,11,12}};
         Solution solution = new Solution();
+        System.out.println("数量:" + solution.spiralOrder(matrix).size());
         solution.spiralOrder(matrix).forEach(System.out::println);
     }
     static class Solution {
         public List<Integer> spiralOrder(int[][] matrix) {
+            if (matrix == null || matrix.length == 0) return new ArrayList<>();
             int m = matrix[0].length;
             int n = matrix.length;
             List<Integer> results = new ArrayList<>(matrix.length * matrix[0].length);
 
-            int rowStart = 0;
-            int colStart = 0;
-
-            while (m>=0 && n>=0) {
-                int i=colStart, j;
-                for (j = rowStart; j < m - 1; j++) {
-                    results.add(matrix[i][j]);
+            int left = 0, right = m-1, top = 0, bottom = n-1;
+            while (left <= right && top <= bottom) {
+                for (int i = left; i <= right; i++) {
+                    results.add(matrix[top][i]);
                 }
-
-                for (i = colStart; i < n - 1; i++) {
-                    results.add(matrix[i][j]);
+                for (int j = top+1; j <= bottom; j++) {
+                    results.add(matrix[j][right]);
                 }
-
-                for (; j > rowStart; j--) {
-                    results.add(matrix[i][j]);
+                if (left < right && top < bottom) {
+                    for (int i = right - 1; i > left; i--) {
+                        results.add(matrix[bottom][i]);
+                    }
+                    for (int j = bottom; j > top; j--) {
+                        results.add(matrix[j][left]);
+                    }
                 }
-
-                for (; i > colStart; i--) {
-                    results.add(matrix[i][j]);
-                }
-
-                colStart++;
-                rowStart++;
-                m -=2;
-                n -=2;
+                left++;
+                right--;
+                top++;
+                bottom--;
             }
             return results;
         }
