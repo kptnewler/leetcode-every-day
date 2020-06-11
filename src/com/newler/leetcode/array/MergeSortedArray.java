@@ -32,6 +32,9 @@ import java.util.HashMap;
  * 3. 一次性移动
  */
 public class MergeSortedArray {
+    /**
+     * 先合并，再排序，时间复杂度O(m+n)
+     */
     class Solution {
         public void merge(int[] nums1, int m, int[] nums2, int n) {
             for (int i = m, j = 0; i < m + n && j < n; i++, j++) {
@@ -42,6 +45,9 @@ public class MergeSortedArray {
         }
     }
 
+    /**
+     *
+     */
     class Solution2 {
         public void merge(int[] nums1, int m, int[] nums2, int n) {
             int[] num1Copy = new int[m];
@@ -61,9 +67,19 @@ public class MergeSortedArray {
     }
 
     class Solution3 {
-
+        /**
+         * 从后往前，大的放到后面
+         */
+        public void merge(int[] nums1, int m, int[] nums2, int n) {
+            int i = m-1, j = n-1, k = m+n-1;
+            while (i >=0 && j >= 0) {
+                nums1[k--] = nums1[i] > nums2[j] ? nums1[i--] : nums2[j--];
+            }
+            if (j >= 0) {
+                System.arraycopy(nums2, 0, nums1, 0, j+1);
+            }
+        }
     }
-
 }
 
 
