@@ -15,34 +15,84 @@ package com.newler.leetcode.stack;
 // Related Topics 栈 数组 双指针
 
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
+
 /**
  * 未完成
  */
 public class TrappingRainWater {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
+        int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
         System.out.println(solution.trap(height));
     }
+
+    /**
+     * 单调栈递减
+     */
     static class Solution {
         public int trap(int[] heights) {
-            if (heights == null || heights.length == 0) return 0;
-            int sum = 0;
-            Stack<Integer> stack = new Stack<>();
+            Deque<Integer> stack = new ArrayDeque<>(heights.length);
+            int count = 0;
             for (int i = 0; i < heights.length; i++) {
-                while (!stack.isEmpty() && heights[i] > heights[stack.peek()]) {
-                    int current = stack.pop();
-                    int right = i;
-                    if (stack.isEmpty()) continue;
-                    int left = stack.peek();
-                    int height = Math.min(heights[right], heights[left]) - heights[current];
-                    int width = right - left- 1;
-                    sum += width * height;
+                while (!stack.isEmpty() && heights[stack.peek()] < heights[i]) {
+                    int current = stack.poll();
+                    if (stack.isEmpty()) break;
+                    int h = Math.min(heights[stack.peek()],heights[i]) - heights[current];
+                    int w = i - stack.peek() - 1;
+                    count += h * w;
                 }
+
                 stack.push(i);
             }
-            return sum;
+            return count;
         }
     }
+
+    /**
+     * 暴力求解
+     */
+    class Solution2 {
+        public int trap(int[] heights) {
+            int count = 0;
+            for (int i = 1; i < heights.length - 1; i++) {
+                int leftMax = 0;
+                for (int j = 0; j < i; j++) {
+                    leftMax = Math.max(heights[j], leftMax);
+                }
+
+                int rightMax = 0;
+                for (int j = i + 1; j < heights.length; j++) {
+                    rightMax = Math.max(heights[j], rightMax);
+                }
+                count += Math.max(Math.min(leftMax, rightMax) - heights[i], 0);
+            }
+            return count;
+        }
+    }
+
+    /**
+     * 用数组保存结果，空间换时间
+     */
+    class Solution3 {
+        public int trap(int[] heights) {
+            int[] leftMaxs = new int[heights.length];
+            int[] rightMaxs = new int[heights.length];
+            int count = 0;
+            for (int j = heights.length - 2; j >= 0; j--) {
+                rightMaxs[j] = Math.max(rightMaxs[j + 1], heights[j+1]);
+            }
+            for (int i = 1; i < heights.length; i++) {
+                leftMaxs[i] = Math.max(leftMaxs[i-1], heights[i-1]);
+            }
+            for (int i = 1; i < heights.length - 1; i++) {
+                count += Math.max(Math.min(leftMaxs[i], rightMaxs[i]) - heights[i], 0);
+            }
+
+            return count;
+        }
+    }
+
 }
