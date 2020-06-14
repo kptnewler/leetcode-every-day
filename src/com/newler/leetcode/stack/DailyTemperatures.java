@@ -10,6 +10,7 @@ package com.newler.leetcode.stack;
 // Related Topics 栈 哈希表
 
 
+import java.util.ArrayDeque;
 import java.util.Stack;
 
 public class DailyTemperatures {
@@ -17,19 +18,18 @@ public class DailyTemperatures {
      * 单调栈，找到当前值右边，离比他大且最近的值
      */
     class Solution {
-        public int[] dailyTemperatures(int[] temperatures) {
-            Stack<Integer> stack = new Stack<>();
-            int[] results = new int[temperatures.length];
-            for (int i = 0; i < temperatures.length; i++) {
-                while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
-                    int popValue = stack.pop();
-
-                    results[popValue] = i - popValue;
+        public int[] dailyTemperatures(int[] T) {
+            ArrayDeque<Integer> stack = new ArrayDeque<>(T.length);
+            int[] results = new int[T.length];
+            for (int i = 0; i < T.length; i++) {
+                while (!stack.isEmpty() &&  T[stack.peek()] < T[i] ) {
+                    int pop  = stack.pop();
+                    results[pop] = i - pop;
                 }
-
                 stack.push(i);
             }
             return results;
         }
     }
+
 }
