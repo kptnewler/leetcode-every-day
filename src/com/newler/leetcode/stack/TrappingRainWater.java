@@ -24,8 +24,8 @@ import java.util.Stack;
  */
 public class TrappingRainWater {
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+        Solution3 solution = new Solution3();
+        int[] height = {2,0,2};
         System.out.println(solution.trap(height));
     }
 
@@ -55,43 +55,92 @@ public class TrappingRainWater {
      * 暴力求解
      */
     class Solution2 {
-        public int trap(int[] heights) {
-            int count = 0;
-            for (int i = 1; i < heights.length - 1; i++) {
-                int leftMax = 0;
-                for (int j = 0; j < i; j++) {
-                    leftMax = Math.max(heights[j], leftMax);
+        public int trap(int[] height) {
+            int ans = 0;
+            for (int i = 1; i < height.length - 1; i++) {
+                int leftMax = 0, rightMax = 0;
+
+                // 找右边最高的柱子
+                for (int j = i; j < height.length; j++) {
+                    rightMax = Math.max(height[j], rightMax);
                 }
 
-                int rightMax = 0;
-                for (int j = i + 1; j < heights.length; j++) {
-                    rightMax = Math.max(heights[j], rightMax);
+                // 找左边最高的柱子
+                for (int j = i; j >= 0; j--) {
+                    leftMax = Math.max(height[j], leftMax);
                 }
-                count += Math.max(Math.min(leftMax, rightMax) - heights[i], 0);
+
+                // 如果自己就是最高的话，
+                // leftMax == rightMax == height[i]
+                ans += Math.min(leftMax, rightMax) - height[i];
             }
-            return count;
+            return ans;
         }
     }
 
     /**
      * 用数组保存结果，空间换时间
      */
-    class Solution3 {
-        public int trap(int[] heights) {
-            int[] leftMaxs = new int[heights.length];
-            int[] rightMaxs = new int[heights.length];
-            int count = 0;
-            for (int j = heights.length - 2; j >= 0; j--) {
-                rightMaxs[j] = Math.max(rightMaxs[j + 1], heights[j+1]);
+    static class Solution3 {
+        public int trap(int[] height) {
+            if (height == null || height.length == 0) return 0;
+
+            int ans = 0;
+            // 数组充当备忘录
+            int[] leftMax = new int[height.length];
+            int[] rightMax = new int[height.length];
+
+            // 初始化base case
+            leftMax[0] = height[0];
+            rightMax[height.length - 1] = height[height.length - 1];
+
+            // 从左到右计算leftMax
+            for (int i = 1; i < height.length; i++) {
+                leftMax[i] = Math.max(height[i], leftMax[i-1]);
             }
-            for (int i = 1; i < heights.length; i++) {
-                leftMaxs[i] = Math.max(leftMaxs[i-1], heights[i-1]);
-            }
-            for (int i = 1; i < heights.length - 1; i++) {
-                count += Math.max(Math.min(leftMaxs[i], rightMaxs[i]) - heights[i], 0);
+            // 从右到左计算rightMax
+            for (int i = height.length - 2; i >= 0; i--) {
+                rightMax[i] = Math.max(height[i], rightMax[i + 1]);
             }
 
-            return count;
+            // 计算结果
+            for (int i = 1; i < height.length - 1; i++) {
+                ans += Math.min(leftMax[i], rightMax[i]) - height[i];
+            }
+
+            return ans;
+        }
+    }
+
+    // 双指针
+    class Solution5 {
+        public int trap(int[] height) {
+            if (height == null || height.length == 0) return 0;
+
+             int ans = 0;
+             int leftMax, rightMax;
+             // 左右指针
+             int left = 0, right = height.length - 1;
+
+             // 初始化
+             leftMax = height[0];
+             rightMax = height[height.length - 1];
+
+             while (left < right) {
+                 // 更新左右两边柱子最大值
+                 leftMax = Math.max(height[left], leftMax);
+                 rightMax = Math.max(height[right], rightMax);
+
+                 // 相当于ans += Math.min(leftMax, rightMax) - height[i]
+                 if (leftMax < rightMax) {
+                     ans += leftMax - height[left];
+                     left++;
+                 } else  {
+                     ans += rightMax - height[right];
+                     right--;
+                 }
+             }
+             return ans;
         }
     }
 
