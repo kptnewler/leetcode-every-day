@@ -19,12 +19,10 @@ package com.newler.leetcode.tree;
 // Related Topics 栈 树
 
 
+import com.newler.leetcode.data.ListNode;
 import com.newler.leetcode.data.TreeNode;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class BinaryTreePreorderTraversal {
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -54,6 +52,21 @@ public class BinaryTreePreorderTraversal {
             results.add(root.val);
             traverse(root.left);
             traverse(root.right);
+        }
+
+        public void traverse2(TreeNode root) {
+            Deque<TreeNode> stack = new ArrayDeque<TreeNode>();
+            List<Integer> results = new ArrayList<>();
+            stack.push(root);
+
+            while (!stack.isEmpty()) {
+                if (root == null) {
+                    root = stack.pop().right;
+                }
+                results.add(root.val);
+                stack.push(root);
+                root = root.left;
+            }
         }
     }
 
