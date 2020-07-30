@@ -30,38 +30,37 @@ import com.newler.leetcode.data.TreeNode;
 
 import java.util.*;
 
-public class BinaryTreeLevelOrderTraversal{
-        //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        List<List<Integer>> allResults = new LinkedList<>();
-        if (root == null) return allResults;
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            List<Integer> levelResults = new ArrayList<>(queue.size());
-            int size =queue.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode removeNode = queue.remove();
-                levelResults.add(removeNode.val);
-                if (removeNode.left != null) queue.add(removeNode.left);
-                if (removeNode.right != null) queue.add(removeNode.right);
-            }
-            allResults.add(levelResults);
-        }
-        return allResults;
-    }
-}
-//leetcode submit region end(Prohibit modification and deletion)
+public class BinaryTreeLevelOrderTraversal {
+    //leetcode submit region begin(Prohibit modification and deletion)
 
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode(int x) { val = x; }
+     * }
+     */
+    class Solution {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            Queue<TreeNode> queue = new LinkedList<>();
+            List<List<Integer>> allResults = new LinkedList<>();
+            if (root == null) return allResults;
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                List<Integer> levelResults = new ArrayList<>(queue.size());
+                int size = queue.size();
+                for (int i = 0; i < size; i++) {
+                    TreeNode removeNode = queue.remove();
+                    levelResults.add(removeNode.val);
+                    if (removeNode.left != null) queue.add(removeNode.left);
+                    if (removeNode.right != null) queue.add(removeNode.right);
+                }
+                allResults.add(levelResults);
+            }
+            return allResults;
+        }
+    }
 }
 
