@@ -1,6 +1,6 @@
 package com.newler.leetcode.queue;
 // [78]、子集
-
+// 2020年8月21日18:40:00
 //给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。 
 //
 // 说明：解集不能包含重复的子集。 
@@ -23,11 +23,10 @@ package com.newler.leetcode.queue;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Subsets {
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     public static void main(String[] args) {
         Solution solution = new Solution();
         int[] nums = {1,2,3};
@@ -60,6 +59,26 @@ public class Subsets {
             }
 
             return results;
+        }
+    }
+
+    /**
+     * 回溯算法
+     */
+    static class Solution2 {
+        private List<List<Integer>> results = new LinkedList<>();
+        public List<List<Integer>> subsets(int[] nums) {
+            backtrack(0, nums, new LinkedList<>());
+            return results;
+        }
+
+        public void backtrack(int cur, int[] nums, List<Integer> paths) {
+            results.add(paths);
+            for (int i = cur; i < nums.length; i++) {
+                paths.add(nums[i]);
+                backtrack(cur+1, nums, paths);
+                int a = paths.remove(i);
+            }
         }
     }
 
