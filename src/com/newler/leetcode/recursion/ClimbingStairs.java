@@ -1,4 +1,4 @@
-package com.newler.leetcode.array;
+package com.newler.leetcode.recursion;
 // [70]、爬楼梯
 // 2020年6月2日21:11:13
 //假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 
