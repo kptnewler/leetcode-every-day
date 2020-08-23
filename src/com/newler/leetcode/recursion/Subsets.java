@@ -1,4 +1,4 @@
-package com.newler.leetcode.queue;
+package com.newler.leetcode.recursion;
 // [78]、子集
 // 2020年8月21日18:40:00
 //给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。 
@@ -73,11 +73,12 @@ public class Subsets {
         }
 
         public void backtrack(int cur, int[] nums, List<Integer> paths) {
-            results.add(paths);
+            // 没有限制每一层都要
+            results.add(new ArrayList<>(paths));
             for (int i = cur; i < nums.length; i++) {
                 paths.add(nums[i]);
-                backtrack(cur+1, nums, paths);
-                int a = paths.remove(i);
+                backtrack(i+1, nums, paths);
+                paths.remove(paths.size() - 1);
             }
         }
     }
