@@ -23,7 +23,7 @@ public class MoveMid {
                 // 属于在峰顶,如6,7,1
                 if(nums[mid] > nums[mid+1] && nums[mid] > nums[mid-1]){
                     return mid;
-                }else if (nums[mid] < nums[mid+1] && nums[mid] >= nums[begin]){
+                }else if (nums[mid] < nums[mid+1] && nums[mid] >= nums[0]){
                     // 只要比开头大，表示完全递增或先递增再递减
                     begin = mid + 1;
                     mid = (begin+end) / 2;

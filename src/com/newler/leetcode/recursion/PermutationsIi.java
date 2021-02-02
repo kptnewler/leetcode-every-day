@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class PermutationsIi {
     public static void main(String[] args) {
@@ -48,14 +49,17 @@ public class PermutationsIi {
                 results.add(new ArrayList<>(paths));
             }
 
+            Supplier
+
             for (int i = 0; i < nums.length; i++) {
-                if ((i > 0 && nums[i] == nums[i - 1] &&!used[i-1]) || used[i]) {
+                if (used[i]) continue;
+                if ((i > 0 && nums[i] == nums[i - 1] &&!used[i-1]) ) {
                     continue;
                 }
                 paths.add(nums[i]);
                 used[i] = true;
                 backTrack(nums, paths, used);
-                used[paths.size() - 1] = false;
+                used[i] = false;
                 paths.remove(paths.size() - 1);
             }
         }

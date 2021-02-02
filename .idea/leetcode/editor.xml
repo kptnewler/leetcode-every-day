@@ -19,6 +19,38 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/BinaryTreeInorderTraversal.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/BinaryTreeInorderTraversal.java" />
+              <option name="questionId" value="94" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/BinaryTreePostorderTraversal.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/BinaryTreePostorderTraversal.java" />
+              <option name="questionId" value="145" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/CombinationSum.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/CombinationSum.java" />
+              <option name="questionId" value="39" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/CombinationSumIi.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/CombinationSumIi.java" />
+              <option name="questionId" value="40" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/DailyTemperatures.java">
           <value>
             <LeetcodeEditor>
@@ -51,11 +83,51 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/FindMinimumInRotatedSortedArray.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/FindMinimumInRotatedSortedArray.java" />
+              <option name="questionId" value="153" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/FindMinimumInRotatedSortedArrayIi.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/FindMinimumInRotatedSortedArrayIi.java" />
+              <option name="questionId" value="154" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/GroupAnagrams.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/GroupAnagrams.java" />
+              <option name="questionId" value="49" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ImplementStackUsingQueues.java">
           <value>
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ImplementStackUsingQueues.java" />
               <option name="questionId" value="225" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/LargestRectangleInHistogram.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/LargestRectangleInHistogram.java" />
+              <option name="questionId" value="84" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/LongestSubstringWithAtLeastKRepeatingCharacters.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/LongestSubstringWithAtLeastKRepeatingCharacters.java" />
+              <option name="questionId" value="395" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -72,6 +144,22 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MaximalRectangle.java" />
               <option name="questionId" value="85" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MaximumSubarray.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MaximumSubarray.java" />
+              <option name="questionId" value="53" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MedianOfTwoSortedArrays.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/MedianOfTwoSortedArrays.java" />
+              <option name="questionId" value="4" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -99,6 +187,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/NAryTreePreorderTraversal.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/NAryTreePreorderTraversal.java" />
+              <option name="questionId" value="775" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/NextGreaterElementI.java">
           <value>
             <LeetcodeEditor>
@@ -120,6 +216,22 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/PlusOne.java" />
               <option name="questionId" value="66" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SearchInRotatedSortedArray.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SearchInRotatedSortedArray.java" />
+              <option name="questionId" value="33" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SingleElementInASortedArray.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SingleElementInASortedArray.java" />
+              <option name="questionId" value="540" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -147,6 +259,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SumOfMutatedArrayClosestToTarget.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/SumOfMutatedArrayClosestToTarget.java" />
+              <option name="questionId" value="1232" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/TaskScheduler.java">
           <value>
             <LeetcodeEditor>
@@ -163,11 +283,35 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ValidAnagram.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ValidAnagram.java" />
+              <option name="questionId" value="242" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ValidParentheses.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ValidParentheses.java" />
+              <option name="questionId" value="20" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/YongLiangGeZhanShiXianDuiLieLcof.java">
           <value>
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/YongLiangGeZhanShiXianDuiLieLcof.java" />
               <option name="questionId" value="100273" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ZuiXiaoDeKgeShuLcof.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/com/newler/leetcode/editor/cn/ZuiXiaoDeKgeShuLcof.java" />
+              <option name="questionId" value="100301" />
             </LeetcodeEditor>
           </value>
         </entry>
