@@ -16,8 +16,6 @@ package com.newler.leetcode.recursion;
 // 👍 381 👎 0
 
 
-import com.newler.leetcode.utils.Swaps;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -49,7 +47,6 @@ public class PermutationsIi {
                 results.add(new ArrayList<>(paths));
             }
 
-            Supplier
 
             for (int i = 0; i < nums.length; i++) {
                 if (used[i]) continue;
