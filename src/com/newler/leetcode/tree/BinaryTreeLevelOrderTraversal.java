@@ -27,10 +27,18 @@ package com.newler.leetcode.tree;
 
 
 import com.newler.leetcode.data.TreeNode;
+import com.newler.leetcode.utils.TreeUtils;
+import jdk.nashorn.internal.ir.ThrowNode;
 
 import java.util.*;
 
 public class BinaryTreeLevelOrderTraversal {
+    public static void main(String[] args) {
+        Integer[] nums = {3,9,20,null,null,15,7};
+        TreeNode root = TreeUtils.createBinaryTreeByArray(nums, 0);
+        Solution2 solution2 = new Solution2();
+        solution2.levelOrder(root);
+    }
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
@@ -42,24 +50,58 @@ public class BinaryTreeLevelOrderTraversal {
      * TreeNode(int x) { val = x; }
      * }
      */
-    class Solution {
+    public class Solution {
         public List<List<Integer>> levelOrder(TreeNode root) {
             Queue<TreeNode> queue = new LinkedList<>();
-            List<List<Integer>> allResults = new LinkedList<>();
-            if (root == null) return allResults;
+            List<List<Integer>> results = new ArrayList<>();
+            if (root == null) return results;
+
+            queue.add(root);
+            List<Integer> levelResults = new LinkedList<>();;
+            List<TreeNode> childs = new LinkedList<>();
+            while (!queue.isEmpty()) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    childs.add(node.left);
+                }
+                if (node.right != null) {
+                    childs.add(node.right);
+                }
+                if (queue.isEmpty()) {
+                    levelResults.add(node.val);
+                    results.add(levelResults);
+                    queue.addAll(childs);
+                    childs.clear();
+                    levelResults = new LinkedList<>();
+                } else  {
+                    levelResults.add(node.val);
+                }
+            }
+            return results;
+        }
+    }
+    static class Solution2 {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            Queue<TreeNode> queue = new LinkedList<>();
+            List<List<Integer>> results = new ArrayList<>();
+            if (root == null) return results;
+
             queue.add(root);
             while (!queue.isEmpty()) {
-                List<Integer> levelResults = new ArrayList<>(queue.size());
+                List<Integer> levelResult = new ArrayList<>(queue.size());
+                Queue<TreeNode> childs = new LinkedList<>();
                 int size = queue.size();
-                for (int i = 0; i < size; i++) {
-                    TreeNode removeNode = queue.remove();
-                    levelResults.add(removeNode.val);
-                    if (removeNode.left != null) queue.add(removeNode.left);
-                    if (removeNode.right != null) queue.add(removeNode.right);
+                for (int i = 0; i <size; i++) {
+                    TreeNode treeNode = queue.poll();
+                    if (treeNode.left != null) childs.add(treeNode.left);
+                    if (treeNode.right != null) childs.add(treeNode.right);
+
+                    levelResult.add(treeNode.val);
                 }
-                allResults.add(levelResults);
+                results.add(levelResult);
+                queue = childs;
             }
-            return allResults;
+            return results;
         }
     }
 }
