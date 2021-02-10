@@ -85,21 +85,19 @@ public class BinaryTreeLevelOrderTraversal {
             Queue<TreeNode> queue = new LinkedList<>();
             List<List<Integer>> results = new ArrayList<>();
             if (root == null) return results;
-
             queue.add(root);
             while (!queue.isEmpty()) {
-                List<Integer> levelResult = new ArrayList<>(queue.size());
-                Queue<TreeNode> childs = new LinkedList<>();
                 int size = queue.size();
-                for (int i = 0; i <size; i++) {
-                    TreeNode treeNode = queue.poll();
-                    if (treeNode.left != null) childs.add(treeNode.left);
-                    if (treeNode.right != null) childs.add(treeNode.right);
+                List<Integer> levelResult = new ArrayList<>(size);
 
+                for (int i = 0; i < size; i++) {
+                    TreeNode treeNode = queue.poll();
+                    if (treeNode == null) break;
                     levelResult.add(treeNode.val);
+                    if (treeNode.left != null) queue.add(treeNode.left);
+                    if (treeNode.right != null) queue.add(treeNode.right);
                 }
                 results.add(levelResult);
-                queue = childs;
             }
             return results;
         }
