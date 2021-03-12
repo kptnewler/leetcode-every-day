@@ -21,34 +21,39 @@ package com.newler.leetcode.linklist;
 
 import com.newler.leetcode.data.ListNode;
 
-import java.util.List;
-import java.util.Stack;
-
 public class PalindromeLinkedList {
 
     class Solution {
         public boolean isPalindrome(ListNode head) {
-            Stack<ListNode> stack = new Stack<>();
-            ListNode tail = head;
-            ListNode mid = head;
-            while (tail != null && tail.next != null) {
-                tail = tail.next.next;
-                mid = mid.next;
+            ListNode fast = head;
+            ListNode slow = head;
+            while (fast != null && fast.next != null) {
+                fast = fast.next.next;
+                slow = slow.next;
             }
-
-            while (mid != null) {
-                stack.push(mid);
-                mid = mid.next;
-            }
-
-            while (!stack.isEmpty()) {
-                if (head.val != stack.pop().val) {
+            // 反转slow
+            ListNode tail =  reservedLinkList(slow);
+            // 反转之后 1 -> 2 <- 1，从两头开始比较，不用担心奇数导致的长度不一致问题。
+            while (tail != null && head != null) {
+                if (tail.val != head.val) {
                     return false;
                 }
+                tail = tail.next;
                 head = head.next;
             }
-
             return true;
+        }
+
+        private ListNode reservedLinkList(ListNode node) {
+            ListNode pre = null, next = null;
+
+            while (node != null) {
+                next = node.next;
+                node.next = pre;
+                pre = node;
+                node = next;
+            }
+            return pre;
         }
     }
 
