@@ -31,45 +31,25 @@ public class MergeTwoSortedLists {
      *
      */
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null) return l2;
-        if (l2 == null) return l1;
-        ListNode f1,f2;
-        f1 = l1;
-
-        // l2插入l1头部
-        while (l2 != null) {
-            if (l1.val > l2.val) {
-                f2 = l2.next;
-                //l2插入到l1的头部
-                l2.next = l1;
-                // l1重新指向头
-                l1 = l2;
-                // l2后移
-                l2 = f2;
-                f1 = l1;
-            } else {
-                break;
+            ListNode head = new ListNode(-1);
+            ListNode cur = head;
+            while (l1 != null && l2 != null) {
+                if (l1.val < l2.val) {
+                    cur.next = l1;
+                    l1 = l1.next;
+                } else {
+                    cur.next = l2;
+                    l2 = l2.next;
+                }
+                cur = cur.next;
             }
-        }
-
-        // l2插入l1中间
-        while (l2 != null && l1.next != null) {
-            if (l1.val <= l2.val && l1.next.val >= l2.val) {
-                f2 = l2.next;
-                // 插入l2
-                l2.next = l1.next;
-                l1.next = l2;
-                // l2后移
-                l2 = f2;
+            if (l1 != null) {
+                cur.next = l1;
             }
-           l1 = l1.next;
-        }
-
-        // l2插入l1尾部
-        if (l2 != null) {
-            l1.next = l2;
-        }
-        return f1;
+            if (l2 != null) {
+                cur.next = l2;
+            }
+            return head.next;
     }
 
 }

@@ -25,19 +25,16 @@ public class PalindromeLinkedList {
 
     class Solution {
         public boolean isPalindrome(ListNode head) {
+            if (head.next == null) return true;
             ListNode fast = head;
             ListNode slow = head;
             while (fast != null && fast.next != null) {
                 fast = fast.next.next;
                 slow = slow.next;
             }
-            // 反转slow
-            ListNode tail =  reservedLinkList(slow);
-            // 反转之后 1 -> 2 <- 1，从两头开始比较，不用担心奇数导致的长度不一致问题。
+            ListNode tail = reservedLinkList(slow);
             while (tail != null && head != null) {
-                if (tail.val != head.val) {
-                    return false;
-                }
+                if (tail.val != head.val) return false;
                 tail = tail.next;
                 head = head.next;
             }
@@ -45,13 +42,14 @@ public class PalindromeLinkedList {
         }
 
         private ListNode reservedLinkList(ListNode node) {
-            ListNode pre = null, next = null;
-
-            while (node != null) {
-                next = node.next;
-                node.next = pre;
-                pre = node;
-                node = next;
+            ListNode pre = null;
+            ListNode next = null;
+            ListNode cur = node;
+            while (cur != null) {
+                next = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = next;
             }
             return pre;
         }
