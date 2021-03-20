@@ -55,6 +55,8 @@ package com.newler.leetcode.divideandconquer;
 // 👍 3632 👎 0
 
 
+import java.util.Arrays;
+
 public class MedianOfTwoSortedArrays {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {

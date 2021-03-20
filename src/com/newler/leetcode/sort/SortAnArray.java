@@ -34,6 +34,9 @@ package com.newler.leetcode.sort;
 import java.util.Arrays;
 
 public class SortAnArray {
+    public static void main(String[] args) {
+        Arrays.sort(new int[]{1,3,2,7,9,5});
+    }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         /**
@@ -60,20 +63,21 @@ public class SortAnArray {
          * 插入排序，前部分作为排序，后面和前面比较，比前面小，排序区就往后挪动位置
          */
         public int[] sorArray2(int[] nums) {
-            // 前面是排序区
-            for (int i = 1; i < nums.length; i++) {
-                int value = nums[i];
-                int j = i - 1;
+            for (int i = 0; i < nums.length-1; i++) {
+                // 未处理区第一个元素
+                int a = nums[i+1];
+                // 处理区
+                int j = i;
+                // 从处理区从前往后比较
                 for (; j >= 0; j--) {
-                    // 比前面小，往后移动
-                    if (value < nums[j]) {
-                        nums[j + 1] = nums[j];
+                    if (a < nums[j]) {
+                        nums[j+1] = nums[j];
                     } else {
+                        // 找到了跳出
                         break;
                     }
                 }
-                // 上面被--了
-                nums[j + 1] = value;
+                nums[j+1] = a;
             }
             return nums;
         }
@@ -119,28 +123,23 @@ public class SortAnArray {
 
         private void mergeSortArray(int[] nums, int l, int m, int r) {
             int[] tmpArray = new int[r - l + 1];
-            int i = l;
-            int j = m + 1;
-            int k = 0;
+            int i = l, j = m + 1, k = 0;
             while (i <= m && j <= r) {
+                // 谁小谁放到数组中
                 if (nums[i] < nums[j]) {
-                    tmpArray[k++] = nums[i];
-                    i++;
-                } else {
-                    tmpArray[k++] = nums[j];
-                    j++;
-                }
-            }
-            if (i <= m) {
-                while (i <= m) {
                     tmpArray[k++] = nums[i++];
+                } else {
+                    tmpArray[k++] = nums[j++];
                 }
             }
 
-            if (j <= r) {
-                while (j <= r) {
-                    tmpArray[k++] = nums[j++];
-                }
+            // 还有剩余添加到末尾
+            while (i <= m) {
+                tmpArray[k++] = nums[i++];
+            }
+
+            while (j <= r) {
+                tmpArray[k++] = nums[j++];
             }
 
             System.arraycopy(tmpArray, 0, nums, l, tmpArray.length);
@@ -163,27 +162,26 @@ public class SortAnArray {
 
         /**
          * 分成两个部分处理区和非处理区
-         * 处理区(l, i -1)
-         * 非处理区(i, r-1)
+         * i为分区点
+         * 小于分区点(l, i -1)
+         * 大于分区点(i, r-1)
          */
         public int partition(int[] nums, int l, int r) {
+            // 把r当做分区比较点
+            int value = nums[r];
             int i = l;
-            for (int j = l; j < r; j++) {
-                // 如果比区点小，插入到处理区
-                if (nums[j] < nums[r]) {
+            for (int j = l; j < r-1; j++) {
+                // 小于分区点则调换位置
+                if (nums[j] < value) {
                     int tmp = nums[j];
                     nums[j] = nums[i];
-                    nums[i] = tmp;
-                    // 处理区变大
-                    i++;
+                    // i++扩大分区点
+                    nums[i++] = tmp;
                 }
             }
-
-            // 把区点换到处理区，一分为二
             int tmp = nums[i];
             nums[i] = nums[r];
             nums[r] = tmp;
-
             return i;
         }
     }
