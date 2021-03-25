@@ -22,6 +22,8 @@ package com.newler.leetcode.hashmap;
 // Related Topics 哈希表 字符串
 
 
+import com.newler.leetcode.data.ListNode;
+
 import java.util.*;
 
 /**
@@ -30,21 +32,53 @@ import java.util.*;
 public class GroupAnagrams {
     class Solution {
         public List<List<String>> groupAnagrams(String[] strs) {
-            Map<String, List<String>> map = new HashMap<>(strs.length);
+            Map<String, List<String>> hashMap = new HashMap<>();
+            List<List<String>> results = new ArrayList<>(strs.length);
             for (String str : strs) {
-                char[] array = str.toCharArray();
-                Arrays.sort(array);
-                String sortString = new String(array);
-                if (map.containsKey(sortString)) {
-                    map.get(sortString).add(str);
-                } else {
-                    List<String> strings = new LinkedList<>();
-                    strings.add(str);
-                    map.put(sortString, strings);
-                }
+                char[] chars = str.toCharArray();
+                 Arrays.sort(chars);
+                 String sortString = new String(chars);
+                List<String> list = hashMap.getOrDefault(sortString, new ArrayList<String>());
+                list.add(str);
+                hashMap.put(sortString, list);
             }
-            return new LinkedList<>(map.values());
+
+            for (String key : hashMap.keySet()) {
+                results.add(hashMap.get(key));
+            }
+
+            return results;
         }
     }
 
+    class Solution2 {
+        public List<List<String>> groupAnagrams(String[] strs) {
+            Map<String, List<String>> hashMap = new HashMap<>();
+            List<List<String>> results = new ArrayList<>(strs.length);
+            for (String str : strs) {
+                int[] chars = new int[26];
+
+                for (int i = 0; i < str.length(); i++) {
+                    chars[str.charAt(i) - 'a']++;
+                }
+
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < chars.length; i++) {
+                    if (chars[i] != 0) {
+                        stringBuilder.append((char) i + 'a');
+                        stringBuilder.append(chars[i]);
+                    }
+                }
+                String newString = stringBuilder.toString();
+                List<String> list = hashMap.getOrDefault(newString, new ArrayList<String>());
+                list.add(newString);
+                hashMap.put(newString, list);
+            }
+
+            for (String key : hashMap.keySet()) {
+                results.add(hashMap.get(key));
+            }
+            return results;
+        }
+    }
 }
