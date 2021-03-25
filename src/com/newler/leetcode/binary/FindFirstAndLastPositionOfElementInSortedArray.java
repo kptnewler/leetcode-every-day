@@ -45,39 +45,35 @@ package com.newler.leetcode.binary;
 // 👍 887 👎 0
 
 
+import java.util.Arrays;
+
 public class FindFirstAndLastPositionOfElementInSortedArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] searchRange(int[] nums, int target) {
             int l = 0, r = nums.length - 1;
-            int findIndex = l;
+            int first = -1, second = -1;
+            int[] results = new int[2];
+            Arrays.fill(results, -1);
             while (l <= r) {
-                int mid = (l + r) / 2;
+                int mid = l + (r-l) / 2;
                 if (target < nums[mid]) {
                     r = mid - 1;
-                } else if (target > nums[mid]){
+                } else if (target > nums[mid]) {
                     l = mid + 1;
                 } else {
-                    findIndex = mid;
-                    break;
+                    int tmp = mid;
+                    while (tmp > 0 && nums[tmp - 1] == nums[tmp]) {
+                        tmp --;
+                    }
+                    results[0] = mid;
+                    while (mid < nums.length && nums[mid + 1] == nums[mid]) {
+                        mid++;
+                    }
+                    results[1] = mid;
                 }
             }
-            int startIndex = findIndex;
-            int endIndex = findIndex;
-            while (true) {
-                boolean a = startIndex >= 0 && nums[startIndex] != target;
-                if (a) {
-                    startIndex--;
-                }
-                boolean b = endIndex < nums.length && nums[endIndex] != target;
-                if (b) {
-                    endIndex++;
-                }
-
-                if (!a && !b) {
-                    return new int[]{startIndex, endIndex};
-                }
-            }
+            return results;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

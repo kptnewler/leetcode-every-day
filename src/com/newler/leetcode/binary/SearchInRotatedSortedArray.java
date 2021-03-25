@@ -53,9 +53,9 @@ public class SearchInRotatedSortedArray {
      * 找到临界点
      */
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        int[] nums = {5,1,3};
-        solution.search(nums, 3);
+        Solution2 solution = new Solution2();
+        int[] nums = {3,1};
+        solution.search(nums, 1);
     }
     static class Solution {
         public int search(int[] nums, int target) {
@@ -100,26 +100,27 @@ public class SearchInRotatedSortedArray {
         }
     }
 
-    class Solution2 {
+    static class Solution2 {
         public int search(int[] nums, int target) {
             int left = 0, right = nums.length - 1;
 
             while (left <= right) {
-                int mid = (right + left) / 2;
+                int mid = left + ((right - left) >> 1);
                 if (nums[mid] == target) return mid;
-                if (nums[mid] > nums[right]) {
-                    // 左边是单调增, 如果在左边界范围内，在左边找
-                    if (nums[mid] > target && nums[left] <= target) {
-                        right = mid-1;
-                    } else {
-                        left = mid+1;
-                    }
+                // 如果左边是单调增
+                // 特殊情况[3,1]
+                if (nums[mid] >= nums[left]) {
+                    // 如果在左边范围内
+                     if (target < nums[mid] && target >= nums[left]) {
+                         right = mid - 1;
+                     } else {
+                         left = mid + 1;
+                     }
                 } else {
-                    // 如果右边是单调增,在右边界范围内
-                    if (nums[right] >= target && nums[mid] < target) {
-                        left = mid+1;
+                    if (target > nums[mid] && target <= nums[right]) {
+                        left = mid + 1;
                     } else {
-                        right = mid-1;
+                        right = mid - 1;
                     }
                 }
             }
