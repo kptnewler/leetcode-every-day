@@ -30,29 +30,30 @@ public class RotateList {
 
     class Solution {
         public ListNode rotateRight(ListNode head, int k) {
-            int len = 0;
-            if (head == null || k == 0) return head;
-            ListNode cur = head;
-            while (cur.next != null) {
-                cur = cur.next;
-                len++;
+            if (head == null || head.next == null) return head;
+            int length  = 1;
+            ListNode tmp = head;
+            // 移动到尾节点
+            while (tmp.next != null) {
+                tmp = tmp.next;
+                length++;
             }
-            // 一个周期
-            len += 1;
-            if (k % len == 0) return head;
 
-            // 最后一个节点的next指向头节点
-            cur.next = head;
-            cur = head;
-            int i = 0;
-            while (i < len - k % len) {
+            // 获取需要移动的位置
+            int moveLength = length - k % length;
+            if (moveLength == length) return head;
+            ListNode cur = head, pre = null;
+            // 找到当前移动节点和它前一个节点
+            while (moveLength > 0) {
+                pre = cur;
                 cur = cur.next;
-                i++;
+                moveLength -- ;
             }
-            head = cur.next;
-            cur.next = null;
-
-            return head;
+            if (pre != null) {
+                pre.next = null;
+            }
+            tmp.next = head;
+            return cur;
         }
     }
 }

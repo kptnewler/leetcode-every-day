@@ -49,19 +49,40 @@ public class RemoveDuplicatesFromSortedListIi {
      * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
      * }
      */
-    class Solution {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] arr = {1,1,1,2,3};
+        ListNode head = new ListNode(arr);
+        solution.deleteDuplicates(head);
+    }
+    static class Solution {
         public ListNode deleteDuplicates(ListNode head) {
             if (head == null || head.next == null) return head;
 
-            ListNode pre = head;
+            ListNode cur = head, pre = null;
 
-            while (head != null) {
-                if (pre.next == head.next) {
-                    // 删除前面的
-
+            while (cur != null) {
+                // 继续后探
+                while (cur.next!=null && cur.val == cur.next.val) {
+                    cur = cur.next;
                 }
-                head = head.next;
+                // pre不为空，则不是前后节点关系，说明存在重复
+                if (pre!=null && pre.next != cur) {
+                    pre.next = cur.next;
+                    cur = cur.next;
+                    continue;
+                }
+                // pre为空，cur不为head，说明存在重复
+                if (pre == null && cur != head) {
+                    head = cur.next;
+                    pre = null;
+                    cur = head;
+                    continue;
+                }
+                pre = cur;
+                cur = cur.next;
             }
+            return head;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
