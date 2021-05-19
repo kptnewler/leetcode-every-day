@@ -107,19 +107,18 @@ public class SearchInRotatedSortedArray {
             while (left <= right) {
                 int mid = left + ((right - left) >> 1);
                 if (nums[mid] == target) return mid;
-                // 如果左边是单调增
-                // 特殊情况[3,1]
+                // 左边有序
+                // 一定要=，防止和[1,3]mid和left重叠还是在左边
                 if (nums[mid] >= nums[left]) {
-                    // 如果在左边范围内
-                     if (target < nums[mid] && target >= nums[left]) {
-                         right = mid - 1;
-                     } else {
-                         left = mid + 1;
-                     }
-                } else {
-                    if (target > nums[mid] && target <= nums[right]) {
-                        left = mid + 1;
+                    if (target >= nums[left] && target <= nums[mid]) {
+                        right = mid - 1;
                     } else {
+                        left = mid + 1;
+                    }
+                } else {
+                    if (target >= nums[mid] && target <= nums[right]) {
+                        left = mid + 1;
+                    } else  {
                         right = mid - 1;
                     }
                 }
