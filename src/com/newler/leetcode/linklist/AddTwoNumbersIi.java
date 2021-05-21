@@ -26,6 +26,7 @@ import java.lang.StringBuilder;
 import com.newler.leetcode.data.ListNode;
 
 import java.math.BigInteger;
+import java.util.Stack;
 
 public class AddTwoNumbersIi {
     public static void main(String[] args) {
@@ -35,36 +36,34 @@ public class AddTwoNumbersIi {
 
     static class Solution {
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-            if (l1 == null) return l2;
-            if (l2 == null) return l1;
-            StringBuilder s1 = new StringBuilder();
-            StringBuilder s2 = new StringBuilder();
-            ListNode cur1 = l1;
-            ListNode cur2 = l2;
-            while (cur1 != null) {
-                s1.append(cur1.val);
-                cur1 = cur1.next;
+            Stack<Integer> s1 = new Stack<>();
+            Stack<Integer> s2 = new Stack<>();
+            ListNode head = null, newListNode = null;
+            int n1, n2, sum, ans = 0;
+            while (l1 != null) {
+                s1.push(l1.val);
+                l1 = l1.next;
             }
 
-            while (cur2 != null) {
-                s2.append(cur2.val);
-                cur2 = cur2.next;
+            while (l2 != null) {
+                s2.push(l2.val);
+                l2 = l2.next;
             }
 
-            ListNode cur = s1.length() > s2.length() ? l1 : l2;
-            ListNode head = s1.length() > s2.length() ? l1 : l2;
-            ListNode pre = null;
-            String sum = new BigInteger(s1.toString()).add(new BigInteger(s2.toString())).toString();
-
-            for (int i = 0; i < sum.length(); i++) {
-                if (cur == null) {
-                    cur = new ListNode(0);
-                    pre.next = cur;
+            while (!s1.isEmpty() || !s2.isEmpty()) {
+                n1 = s1.isEmpty() ? 0 : s1.pop();
+                n2 = s2.isEmpty() ? 0 : s2.pop();
+                sum = n1 + n2 + ans;
+                if (head == null) {
+                    newListNode = head = new ListNode(sum % 10);
+                } else {
+                    newListNode.next = new ListNode(sum % 10);
+                    newListNode = newListNode.next;
                 }
-                cur.val = sum.charAt(i) - '0';
-                pre = cur;
-                cur = cur.next;
+                ans = sum / 10;
+
             }
+
 
             return head;
         }

@@ -35,10 +35,11 @@ import java.util.Arrays;
 
 public class SortAnArray {
     public static void main(String[] args) {
-        Arrays.sort(new int[]{1,3,2,7,9,5});
+        Solution solution = new Solution();
+        solution.sortArray6(new int[]{5,1,1,2,0,0});
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
+    static class Solution {
         /**
          * 冒泡排序，和相邻元素比较，比他大就调换位置
          */
@@ -183,6 +184,39 @@ public class SortAnArray {
             nums[i] = nums[r];
             nums[r] = tmp;
             return i;
+        }
+
+        public int[] sortArray6(int[] nums) {
+            int n = nums.length;
+            for (int i = (n - 1) / 2; i >= 0; i--) {
+                heap(nums, i, nums.length);
+            }
+            for (int i = 0; i < n - 1; i++) {
+                swap(nums, 0, nums.length - i - 1);
+                heap(nums, 0, n-i-1);
+            }
+            return nums;
+        }
+
+        public void heap(int[] nums, int i, int n) {
+            while (true) {
+                int maxPos = i;
+                if (i * 2 + 2 < n && nums[i * 2 + 2] > nums[maxPos]) {
+                    maxPos = i * 2 + 2;
+                }
+                if (i * 2 + 1 < n && nums[i * 2 + 1] > nums[maxPos]) {
+                    maxPos = i * 2 + 1;
+                }
+                if (maxPos == i) break;;
+                swap(nums, maxPos, i);
+                i = maxPos;
+            }
+        }
+
+        public void swap(int[] nums, int i, int j) {
+            int tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
