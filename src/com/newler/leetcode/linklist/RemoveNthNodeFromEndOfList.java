@@ -64,29 +64,25 @@ public class RemoveNthNodeFromEndOfList {
      */
     class Solution2 {
         public ListNode removeNthFromEnd(ListNode head, int n) {
-            ListNode last = head;
-            ListNode pre = head;
-            while (last != null) {
-                last = last.next;
-                n--;
+            ListNode preHead = new ListNode(0);
+            preHead.next = head;
+            // 快慢指针
+            ListNode fast = head, slow = preHead;
+            // 快指针比慢指针先走n，慢指针下一个节点就是需要删除的节点
+            // 如果要要找删除节点的前驱节点，slow则指向头节点的前驱节点
+            for (int i = 0; i < n; i++) {
+                fast = fast.next;
             }
 
-            // 删除的头结点
-            if (n == 0) {
-                head = head.next;
-                return head;
+            while (fast != null) {
+                fast = fast.next;
+                slow = slow.next;
             }
 
-            // 删除节点位置，超出链表大小
-            if (n > 0) return null;
 
-            while (++n != 0) {
-                pre = pre.next;
-            }
+            slow.next = slow.next.next;
 
-            pre.next = pre.next.next;
-
-            return head;
+            return preHead.next;
         }
     }
 
