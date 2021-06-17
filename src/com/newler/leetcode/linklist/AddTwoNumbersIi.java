@@ -35,12 +35,14 @@ public class AddTwoNumbersIi {
     }
 
     static class Solution {
+        /**
+         * 注意事项倒序输出
+         */
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             Stack<Integer> s1 = new Stack<>();
             Stack<Integer> s2 = new Stack<>();
-            ListNode head = new ListNode(0);
-            ListNode curListNode = head;
-            ListNode preListNode = null;
+            ListNode curListNode ;
+            ListNode nextListNode = null;
             int sum = 0, ans = 0;
 
             while (l1 != null) {
@@ -58,13 +60,13 @@ public class AddTwoNumbersIi {
                 sum = n1 + n2 + ans;
                 ans = sum / 10;
                 curListNode = new ListNode(sum % 10);
-                if (preListNode != null) {
-                    preListNode.next = curListNode;
-                }
-                preListNode = curListNode;
+                // 倒序插入，把下个节点插入到后面
+                curListNode.next = nextListNode;
+                // 不断指向头结点
+                nextListNode = curListNode;
             }
 
-            return head.next;
+            return nextListNode;
         }
     }
 
