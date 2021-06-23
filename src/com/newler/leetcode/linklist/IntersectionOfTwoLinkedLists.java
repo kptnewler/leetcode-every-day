@@ -80,68 +80,20 @@ public class IntersectionOfTwoLinkedLists {
     }
 
     /**
-     * 解法1：计算出A，B节点各自的长度lenA，lenB，让长链表先走abs(lenA-lenB)，使A，B链表处于同一起点，然后遍历，如果出现curA=curB
-     * 说明有相交节点
-     * a1->a2->a3->a4
-     *             -> ab1->ab2-ab3
-     * b1->b2->b4
-     * 先让a节点先走1步到达a2，然后A和B节点同时遍历
-     */
-    public static class Solution {
-
-        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-            int lenA = 0, lenB = 0;
-            if (headA == null || headB == null) return null;
-            ListNode curA = headA, curB = headB;
-            while (curA.next != null || curB.next != null) {
-                if (curA.next != null) {
-                    curA = curA.next;
-                    lenA++;
-                }
-
-                if (curB.next != null) {
-                    curB = curB.next;
-                    lenB++;
-                }
-            }
-
-            if (curA == curB) {
-                curA = headA;
-                curB = headB;
-                for (int i = 0; i < Math.max(lenA, lenB) - Math.min(lenA, lenB); i++) {
-                    if (lenA > lenB) {
-                        curA = curA.next;
-                    } else {
-                        curB = curB.next;
-                    }
-                }
-
-                while (curA != null && curB != null) {
-                    if (curA == curB) {
-                        return curA;
-                    }
-                    curA = curA.next;
-                    curB = curB.next;
-                }
-            } else {
-                return null;
-            }
-            return null;
-        }
-    }
-
-    /**
      * 解法二:更妙
-     * 如果长度A，B链表长度不相等
-     * 走一个循环，A+B = B+A， 总长度相同，如果相交最终肯定能找到相交节点
-     * a1->a2->a3               b1->b2
-     *           -> ab1 -> ab2              -> ab1 -> ab2
-     * b1->b2                   a1->a2->a3
+     * 如果长度A，B链表长度不相等 , A = a + c, B = b+c, c是公共部分
+     * 如果A比B短，A先走完就去走B。
+     * 走一个循环，A+B = B+A， 总长度相同
+     * 整个走的过程如下，一次走完长度相同，如果链表相交下次必然碰到一起
+     * a1->a2->a3->ab1->ab2->b1->b2->ab1->ab2
+     * b1->b2->ab1->ab2->a1->a2->a3->ab1->ab2
+     *
      */
-    class Solution2 {
+    static class Solution {
         public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
             ListNode curA = headA, curB = headB;
             while (curA != curB) {
+                // 如果cur1走到链表A尾部了，切换到链表B
                 curA = curA == null ? headB : curA.next;
                 curB = curB == null ? headA : curB.next;
             }
