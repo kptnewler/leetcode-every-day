@@ -38,34 +38,33 @@ public class AddTwoNumbersIi {
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             Stack<Integer> s1 = new Stack<>();
             Stack<Integer> s2 = new Stack<>();
-            ListNode head = null, newListNode = null;
-            int n1, n2, sum, ans = 0;
+            ListNode head = new ListNode(0);
+            ListNode curListNode = head;
+            ListNode preListNode = null;
+            int sum = 0, ans = 0;
+
             while (l1 != null) {
                 s1.push(l1.val);
                 l1 = l1.next;
             }
-
             while (l2 != null) {
                 s2.push(l2.val);
                 l2 = l2.next;
             }
 
-            while (!s1.isEmpty() || !s2.isEmpty()) {
-                n1 = s1.isEmpty() ? 0 : s1.pop();
-                n2 = s2.isEmpty() ? 0 : s2.pop();
+            while (!s1.isEmpty() || !s2.isEmpty() || ans != 0) {
+                int n1 = s1.isEmpty() ? 0 : s1.pop();
+                int n2 = s2.isEmpty() ? 0 : s2.pop();
                 sum = n1 + n2 + ans;
-                if (head == null) {
-                    newListNode = head = new ListNode(sum % 10);
-                } else {
-                    newListNode.next = new ListNode(sum % 10);
-                    newListNode = newListNode.next;
-                }
                 ans = sum / 10;
-
+                curListNode = new ListNode(sum % 10);
+                if (preListNode != null) {
+                    preListNode.next = curListNode;
+                }
+                preListNode = curListNode;
             }
 
-
-            return head;
+            return head.next;
         }
     }
 

@@ -64,25 +64,25 @@ static class Solution {
     }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int ans = 0;
-        ListNode head = null, newNode = null;
-        int n1, n2, sum;
-        while (l1 != null || l2 != null) {
-            n1 = l1 == null ? 0 : l1.val;
-            n2 = l2 == null ? 0 : l2.val;
+        int sum = 0;
+        ListNode head = new ListNode(0);
+        ListNode newListNode = head;
+        while (l1 != null || l2!=null) {
+            int n1 = l1 == null ? 0 : l1.val;
+            int n2 = l2 == null ? 0 : l2.val;
+
             sum = n1 + n2 + ans;
-            if(head == null) {
-                newNode = head = new ListNode(sum % 10);
-            } else  {
-                newNode.next = new ListNode(sum % 10);
-                newNode = newNode.next;
-            }
-            // 获取进位
             ans = sum / 10;
+            newListNode.next = new ListNode(sum % 10);
             if (l1 != null) l1 = l1.next;
             if (l2 != null) l2 = l2.next;
+            newListNode = newListNode.next;
         }
-        if (ans != 0) newNode.next = new ListNode(ans);
-        return head;
+
+        if (ans != 0) {
+            newListNode.next = new ListNode(ans);
+        }
+        return head.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
