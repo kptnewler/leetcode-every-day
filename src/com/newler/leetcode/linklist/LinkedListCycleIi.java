@@ -53,30 +53,36 @@ public class LinkedListCycleIi {
         Solution solution = new Solution();
         solution.detectCycle(listNode);
     }
+    /**
+     * fast走2步 slow走1步，相同时间下 fast走过的路程= 2* slow走过的路程
+     * 如果两者相遇，fast比slow多走n圈。
+     * fast_distance = 2 * slow_distance
+     * fast_distance = slow_distance  + n * b(链表圈)
+     * slow_distance = n*b
+     * 链表只要走a + n * b一定会到入环口，n = 0，1,2,3,结果都一样。
+     * 这是slow已经走了n * b，只要再走a就到链表口了
+     */
     public static class Solution {
         public ListNode detectCycle(ListNode head) {
-            if (head == null || head.next == null) return null;
+            if (head == null) return null;
             ListNode fast = head, slow = head;
-            while (fast != null && fast.next != null) {
-                fast = fast.next.next;
+            // 第一次相遇，slow走了 n*b
+            while (true) {
+                if (fast == null || fast.next == null) return null;
                 slow = slow.next;
-
-                if (fast == slow) {
-                   fast = head;
-                   break;
-                }
+                fast = fast.next.next;
+                if (fast == slow) break;
             }
-
-            while (fast != null && slow != null) {
-                if (fast == slow) {
-                    return fast;
-                }
-
+            // 重新指向表头，走a步
+            fast = head;
+            // 第二次相遇就到入口
+            while (fast != slow) {
                 fast = fast.next;
                 slow = slow.next;
             }
-            return null;
+            return fast;
         }
     }
 }
-
+// fast = 2 * slow
+// fast = slow + n*圈  slow = nb
