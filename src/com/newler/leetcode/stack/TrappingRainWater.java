@@ -35,19 +35,20 @@ public class TrappingRainWater {
     static class Solution {
         public int trap(int[] heights) {
             Deque<Integer> stack = new ArrayDeque<>(heights.length);
-            int count = 0;
+            int sum = 0;
             for (int i = 0; i < heights.length; i++) {
                 while (!stack.isEmpty() && heights[stack.peek()] < heights[i]) {
-                    int current = stack.poll();
+                    int currentIndex = stack.pop();
+                    int rightIndex = i;
                     if (stack.isEmpty()) break;
-                    int h = Math.min(heights[stack.peek()],heights[i]) - heights[current];
-                    int w = i - stack.peek() - 1;
-                    count += h * w;
+                    int leftIndex = stack.peek();
+                    int width = rightIndex - leftIndex - 1;
+                    int height = Math.min(heights[rightIndex], heights[leftIndex])- heights[currentIndex];
+                    sum += height * width;
                 }
-
                 stack.push(i);
             }
-            return count;
+            return sum;
         }
     }
 

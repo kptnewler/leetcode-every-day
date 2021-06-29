@@ -22,12 +22,11 @@ public class DailyTemperatures {
             int[] results = new int[temperatures.length];
             for (int i = 0; i < temperatures.length; i++) {
                 while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
-                    int current = stack.pop();
-                    results[current] = i - current;
+                    int j = stack.pop();
+                    results[j] = i - j;
                 }
                 stack.push(i);
             }
-
             return results;
         }
     }
