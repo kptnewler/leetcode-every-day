@@ -28,60 +28,29 @@ public class RemoveNthNodeFromEndOfList {
 
     }
 
+
     /**
-     * 解法一
+     * 解法
      */
     class Solution {
         public ListNode removeNthFromEnd(ListNode head, int n) {
-            int size = 0;
-            ListNode h = head;
-            while (h != null) {
-                size++;
-                h = h.next;
-            }
-
-            h = head;
-            int a = size - n;
-            if (a == 0) {
-                h = h.next;
-                return h;
-            }
-            while (a > 1) {
-                h = h.next;
-                a--;
-            }
-
-            ListNode tmp;
-            tmp = h.next.next;
-            h.next = tmp;
-
-            return head;
-        }
-    }
-
-    /**
-     * 解法二
-     */
-    class Solution2 {
-        public ListNode removeNthFromEnd(ListNode head, int n) {
             ListNode preHead = new ListNode(0);
             preHead.next = head;
-            // 快慢指针
-            ListNode fast = head, slow = preHead;
-            // 快指针比慢指针先走n，慢指针下一个节点就是需要删除的节点
-            // 如果要要找删除节点的前驱节点，slow则指向头节点的前驱节点
+            ListNode slow = preHead;
+            ListNode fast = head;
+            // 先走n步，两者间隔n个格子
+            // 比如 1-> 2-> 3
+            //      s       f 领先 1个格子，即删除倒数第几个。
             for (int i = 0; i < n; i++) {
                 fast = fast.next;
             }
 
             while (fast != null) {
-                fast = fast.next;
                 slow = slow.next;
+                fast = fast.next;
             }
 
-
             slow.next = slow.next.next;
-
             return preHead.next;
         }
     }
