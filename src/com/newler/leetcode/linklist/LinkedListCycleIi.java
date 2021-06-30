@@ -64,23 +64,22 @@ public class LinkedListCycleIi {
      */
     public static class Solution {
         public ListNode detectCycle(ListNode head) {
-            if (head == null) return null;
-            ListNode fast = head, slow = head;
-            // 第一次相遇，slow走了 n*b
-            while (true) {
-                if (fast == null || fast.next == null) return null;
-                slow = slow.next;
-                fast = fast.next.next;
-                if (fast == slow) break;
-            }
-            // 重新指向表头，走a步
-            fast = head;
-            // 第二次相遇就到入口
-            while (fast != slow) {
-                fast = fast.next;
-                slow = slow.next;
-            }
-            return fast;
+           ListNode fast = head, slow = head;
+           while (true) {
+               if (fast == null || fast.next == null) {
+                   return null;
+               }
+               fast = fast.next.next;
+               slow = slow.next;
+               if (fast == slow) break;;
+           }
+
+           fast = head;
+           while (fast != slow) {
+               fast = fast.next;
+               slow = slow.next;
+           }
+           return fast;
         }
     }
 }

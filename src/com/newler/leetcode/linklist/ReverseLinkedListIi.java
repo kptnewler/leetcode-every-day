@@ -19,49 +19,52 @@ public class ReverseLinkedListIi {
     public static void main(String[] args) {
         Solution solution = new Solution();
         int nums[] = {1,2,3,4,5};
-        ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
-        ListNode listNode3 = new ListNode(3);
-        ListNode listNode4 = new ListNode(4);
-        ListNode listNode5 = new ListNode(5);
-        listNode1.next = listNode2;
+        ListNode head = new ListNode(nums);
 //        listNode2.next = listNode3;
 //        listNode3.next = listNode4;
 //        listNode4.next = listNode5;
 
-        solution.reverseBetween(listNode1, 1, 2);
+        solution.reverseBetween(head, 2, 4);
     }
 
     static class Solution {
         public ListNode reverseBetween(ListNode head, int m, int n) {
-            if (head == null) {
-                return head;
-            }
-            ListNode reverseHead = head;
-            ListNode preReverseHead = null;
-            while (m > 1 && reverseHead != null) {
-                preReverseHead = reverseHead;
-                reverseHead = reverseHead.next;
-                m--;
-                n--;
+            if (head == null) return null;
+            ListNode preHead = new ListNode(-1);
+            preHead.next = head;
+            // 保存左边界前一个节点
+            ListNode lpre = preHead;
+            ListNode rNext = head;
+            for (int i = 0; i < m - 1; i++) {
+                lpre = lpre.next;
             }
 
-            while (n > 1 && reverseHead != null && reverseHead.next != null) {
-                ListNode nextReverseHead = reverseHead.next;
-                // 先移除
-                reverseHead.next = reverseHead.next.next;
-                // 再插入
-                if (preReverseHead == null) {
-                    nextReverseHead.next = head;
-                    head = nextReverseHead;
-                } else  {
-                    ListNode tmp = preReverseHead.next;
-                    preReverseHead.next = nextReverseHead;
-                    nextReverseHead.next = tmp;
-                }
-                n--;
+            for (int i = 0; i < n - 1; i++) {
+                rNext = rNext.next;
             }
-            return head;
+
+            ListNode l = lpre.next;
+            ListNode r = rNext;
+            // 保存右边界前一个节点
+            rNext = rNext.next;
+
+            // 截断取出需要反转的链表
+            lpre.next = null;
+            r.next = null;
+            ListNode cur = l, pre = null, next;
+            while (cur != null) {
+                next = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = next;
+            }
+
+            lpre.next = r;
+            if (l!=null) {
+                l.next = rNext;
+            }
+
+            return lpre.next;
         }
     }
 }

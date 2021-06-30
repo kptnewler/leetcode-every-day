@@ -62,13 +62,9 @@ public class ReverseLinkedList {
              ListNode cur = head;
              ListNode pre = null;
              while (cur != null) {
-                 // 先获取下一个节点，防止被覆盖
-                 ListNode next = cur.next;
-                 // 当前节点的next指向前一个节点
+                 ListNode next =cur.next;
                  cur.next = pre;
-                 // 前一个节点后移
                  pre = cur;
-                 // 当前节点后移
                  cur = next;
              }
 
