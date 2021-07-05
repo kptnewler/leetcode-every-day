@@ -92,9 +92,10 @@ public class IntersectionOfTwoLinkedLists {
     static class Solution {
         public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
             ListNode curA = headA, curB = headB;
+            // 如果长度不相等 null ！= curB，curA则切换到对方
+            // 如果两者长度相等，但是不匹配，null = null，则返回null。
             while (curA != curB) {
-                // 如果cur1走到链表A尾部了，切换到链表B
-                curA = curA == null ? headB : curA.next;
+                curA = curA == null ?  headB: curA.next;
                 curB = curB == null ? headA : curB.next;
             }
             return curA;

@@ -50,31 +50,11 @@ import java.util.Stack;
 
 public class ValidParentheses {
     public static void main(String[] args) {
-        Solution2 solution2  = new Solution2();
-        solution2.isValid("{[]}");
-    }
-    class Solution {
-        public boolean isValid(String s) {
-            Stack<Character> stack = new Stack<>();
-
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
-                if (stack.isEmpty()) {
-                    stack.push(c);
-                    continue;
-                }
-
-                if (c  - stack.peek()== 1 || c - stack.peek() == 2) {
-                    stack.pop();
-                } else {
-                    stack.push(c);
-                }
-            }
-            return stack.isEmpty();
-        }
+        Solution solution2  = new Solution();
+        solution2.isValid("()");
     }
 
-    static class Solution2 {
+    static class Solution {
 
         public boolean isValid(String s) {
 
@@ -86,9 +66,11 @@ public class ValidParentheses {
 
             for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
+                // 左括号全部丢进去
                 if (map.containsKey(c)) {
                     stack.push(c);
                 } else {
+                    // 如果遇到右括号，还栈顶不相等直接丢出去。
                     if (stack.isEmpty() || map.get(stack.pop()) != c ) {
                         return false;
                     }
