@@ -59,23 +59,21 @@ public class ValidParentheses {
         public boolean isValid(String s) {
 
             Stack<Character> stack = new Stack<>();
-            Map<Character, Character> map = new HashMap<>(3);
-            map.put('{', '}');
-            map.put('(', ')');
-            map.put('[', ']');
+            HashMap<Character, Character> hashMap = new HashMap<>(3);
+            hashMap.put('(', ')');
+            hashMap.put('[', ']');
+            hashMap.put('{', '}');
 
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
-                // 左括号全部丢进去
-                if (map.containsKey(c)) {
+            for (char c : s.toCharArray()) {
+                if (hashMap.containsKey(c)) {
                     stack.push(c);
                 } else {
-                    // 如果遇到右括号，还栈顶不相等直接丢出去。
-                    if (stack.isEmpty() || map.get(stack.pop()) != c ) {
+                    if (stack.isEmpty() ||  c != hashMap.get(stack.pop())) {
                         return false;
                     }
                 }
             }
+
             return stack.isEmpty();
         }
 

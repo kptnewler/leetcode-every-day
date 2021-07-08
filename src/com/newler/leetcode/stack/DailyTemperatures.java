@@ -11,6 +11,8 @@ package com.newler.leetcode.stack;
 
 
 import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Stack;
 
 public class DailyTemperatures {
     /**
@@ -18,12 +20,12 @@ public class DailyTemperatures {
      */
     class Solution {
         public int[] dailyTemperatures(int[] temperatures) {
-            ArrayDeque<Integer> stack = new ArrayDeque<>(temperatures.length);
             int[] results = new int[temperatures.length];
+            LinkedList<Integer> stack = new LinkedList<Integer>();
             for (int i = 0; i < temperatures.length; i++) {
-                while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
-                    int j = stack.pop();
-                    results[j] = i - j;
+                while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                    int peekIndex = stack.pop();
+                    results[peekIndex] = i - peekIndex;
                 }
                 stack.push(i);
             }

@@ -24,56 +24,39 @@ import java.util.Stack;
 public class DecodeString {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        String s = "2[abc]3[cd]ef";
+        String s = "a2[2[cc]]";
         System.out.println(solution.decodeString(s));
     }
     static class Solution {
         public String decodeString(String s) {
-            Stack<Character> stack = new Stack();
+            Stack<String > charStack = new Stack();
+            Stack<Integer> numStack = new Stack<>();
             StringBuilder result = new StringBuilder();
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
-                if (c != ']') {
-                    stack.push(c);
+            int num = 0;
+            for (char c : s.toCharArray()) {
+                if (c >= '0' && c <= '9') {
+                    num = num * 10 + c-'0';
+                } else if (c == '[') {
+                    // 将括号前的数字和字母全部保存，[没有数字填入0
+                    numStack.push(num);
+                    // [前没有字母填入""
+                    charStack.push(result.toString());
+                    result = new StringBuilder();
+                    num = 0;
+                } else if (c == ']') {
+                    int curNum = numStack.pop();
+                    StringBuilder tmp = new StringBuilder();
+                    // 括号内的字符串 * [前的num
+                    for (int i = 0; i < curNum; i++) {
+                        tmp.append(result);
+                    }
+                    // lastResult即[前的字母 + num * char
+                    result = new StringBuilder(charStack.pop() + tmp);
                 } else {
-                    StringBuilder addString = new StringBuilder();
-                    StringBuilder countString = new StringBuilder();
-                    int count;
-                    if (stack.isEmpty()) {
-                        continue;
-                    }
-                    while (stack.peek() != '[') {
-                        addString.append(stack.pop());
-                    }
-                    stack.pop();
-                    while (!stack.isEmpty() && stack.peek() >= '0' && stack.peek() <= '9') {
-                        countString.append(stack.pop());
-                    }
-                    if (countString.length() == 0) {
-                        count = 1;
-                    } else {
-                        count = Integer.parseInt(countString.reverse().toString());
-                    }
-                    String add = addString.reverse().toString();
-                    while (count > 0) {
-                        if (stack.isEmpty()) {
-                            result.append(add);
-                        } else {
-                            for (int j = 0; j < add.length(); j++) {
-                                stack.push(add.charAt(j));
-                            }
-                        }
-                        count--;
-                    }
+                    // 括号内字母一直加
+                    result.append(c);
                 }
             }
-
-            StringBuilder addString = new StringBuilder();
-            while (!stack.isEmpty()) {
-                addString.append(stack.pop());
-            }
-
-            result.append(addString.reverse().toString());
             return result.toString();
         }
     }
