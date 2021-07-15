@@ -104,26 +104,24 @@ public class DesginMinStack {
     static class MinStack2 {
         /** initialize your data structure here. */
         private Stack<Integer> dataStack;
-        private Stack<Integer> minStack;
         int min = Integer.MAX_VALUE;
         public MinStack2() {
             dataStack = new Stack<>();
-            minStack = new Stack<>();
         }
 
         public void push(int x) {
-            dataStack.push(x);
             if (x <= min) {
+                // 先保存上个最小值
+                dataStack.push(min);
                 min = x;
-                minStack.push(x);
             }
+            dataStack.push(x);
         }
 
         public void pop() {
             int x = dataStack.pop();
             if (x == min) {
-                minStack.pop();
-                min = minStack.isEmpty() ? Integer.MAX_VALUE : minStack.peek();
+                min = dataStack.pop();
             }
         }
 
