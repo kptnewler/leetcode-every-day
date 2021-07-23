@@ -27,6 +27,7 @@ package com.newler.leetcode.stack;
 
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class LargestRectangleInHistogram {
@@ -67,26 +68,31 @@ public class LargestRectangleInHistogram {
         }
     }
 
+    /**
+     * 单调栈
+     */
     static class Solution2 {
         public int largestRectangleArea(int[] heights) {
-            int[] lefts = new int[heights.length];
-            int[] rights = new int[heights.length];
-
-            Arrays.fill(rights, heights.length);
-            Stack<Integer> stack = new Stack();
+            int[] left = new int[heights.length];
+            int[] right = new int[heights.length];
+            // 防止rights[length] = 0
+            Arrays.fill(right, right.length);
+            LinkedList<Integer> stack = new LinkedList<>();
             for (int i = 0; i < heights.length; i++) {
-                while (!stack.isEmpty() && stack.peek() >= heights[i]) {
-                    rights[stack.pop()] = i;
+                while (!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
+                    right[stack.pop()] = i;
                 }
-                lefts[i] = stack.isEmpty() ? -1 : stack.peek();
+                left[i] = stack.isEmpty() ? -1 : stack.peek();
+
                 stack.push(i);
             }
-
-            int maxArea = 0;
+            int max = Integer.MIN_VALUE;
             for (int i = 0; i < heights.length; i++) {
-                maxArea = Math.max((rights[i] - lefts[i] - 1) * heights[i], maxArea);
+                int width = right[i] - left[i] - 1;
+                int height = heights[i];
+                max = Math.max(max, height*width);
             }
-            return maxArea;
+            return max;
         }
     }
 

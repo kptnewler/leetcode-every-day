@@ -17,6 +17,7 @@ package com.newler.leetcode.stack;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -34,17 +35,23 @@ public class TrappingRainWater {
      */
     static class Solution {
         public int trap(int[] heights) {
-            Deque<Integer> stack = new ArrayDeque<>(heights.length);
-            int sum = 0;
+           int sum = 0;
+            LinkedList<Integer> stack = new LinkedList<>();
+            // 单点栈 从大到小，找左边界和右边界
+            /*
+            * 1
+            * 1 1   1
+            * 1 1 1 1
+            * */
             for (int i = 0; i < heights.length; i++) {
-                while (!stack.isEmpty() && heights[stack.peek()] < heights[i]) {
-                    int currentIndex = stack.pop();
-                    int rightIndex = i;
+                while (!stack.isEmpty() && heights[i] > heights[stack.peek()]) {
+                    int cur = stack.pop();
                     if (stack.isEmpty()) break;
-                    int leftIndex = stack.peek();
-                    int width = rightIndex - leftIndex - 1;
-                    int height = Math.min(heights[rightIndex], heights[leftIndex])- heights[currentIndex];
-                    sum += height * width;
+                    int left = stack.peek();
+                    int right = i;
+                    int height = Math.min(heights[left], heights[right]) - heights[cur];
+                    int width = right - left - 1;
+                    sum += width * height;
                 }
                 stack.push(i);
             }

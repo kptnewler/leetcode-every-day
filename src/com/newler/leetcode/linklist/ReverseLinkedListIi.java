@@ -17,64 +17,68 @@ import com.newler.leetcode.data.ListNode;
 
 public class ReverseLinkedListIi {
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        Solution2 solution = new Solution2();
         int nums[] = {1,2,3,4,5};
         ListNode head = new ListNode(nums);
-//        listNode2.next = listNode3;
-//        listNode3.next = listNode4;
-//        listNode4.next = listNode5;
 
         solution.reverseBetween(head, 2, 4);
     }
 
     static class Solution {
         /**
-         * 找到区间链表，反转，然后接头和尾
+         * 1、找反转链表左边界前一个节点lPre，右边界节点 r
+         * 2、找左边界l = lPre.next 右边界后一个节点 RNext = r.next
+         * 3、切断反转链表的联系
+         * 4、反转链表
+         * 5、左边界前一个节点接右节点 lPre.next = r 左边界点接右边界后一个节点l.next = rNext
          */
         public ListNode reverseBetween(ListNode head, int m, int n) {
-            if (head == null) return null;
+            // -1 1 2 3 4 5
             ListNode preHead = new ListNode(-1);
             preHead.next = head;
-            // 保存左边界前一个节点
-            ListNode lpre = preHead;
-            ListNode rNext = head;
+            ListNode pre = preHead;
+            // 第一步、找两个边界值，保存左边界前节点，右边界后节点
+            // 反转链表最后一个节点
+            ListNode lastReverseNode = head;
             for (int i = 0; i < m - 1; i++) {
-                lpre = lpre.next;
+                pre = pre.next;
             }
 
             for (int i = 0; i < n - 1; i++) {
-                rNext = rNext.next;
+                lastReverseNode = lastReverseNode.next;
             }
+            // 反转链表左边界
+            ListNode startReverseNode = pre.next;
+            ListNode cur = lastReverseNode.next;
 
-            ListNode l = lpre.next;
-            ListNode r = rNext;
-            // 保存右边界前一个节点
-            rNext = rNext.next;
+            // 切断联系
+            pre.next = null;
+            lastReverseNode.next = null;
 
-            // 截断取出需要反转的链表
-            lpre.next = null;
-            r.next = null;
-            ListNode cur = l, pre = null, next;
-            while (cur != null) {
-                next = cur.next;
+            reverseNode(startReverseNode);
+
+            // 头结尾，尾接头
+            pre.next = lastReverseNode;
+            startReverseNode.next = cur;
+            return preHead.next;
+        }
+
+        private void reverseNode(ListNode head) {
+            ListNode pre = null;
+            ListNode cur = head;
+            while (cur!=null) {
+                ListNode next =cur.next;
                 cur.next = pre;
                 pre = cur;
                 cur = next;
             }
-
-            lpre.next = r;
-            if (l!=null) {
-                l.next = rNext;
-            }
-
-            return lpre.next;
         }
     }
 
     /**
      *头插法
      */
-    class Solution2 {
+    static class Solution2 {
         public ListNode reverseBetween(ListNode head, int m, int n) {
             ListNode preHead = new ListNode(-1);
             preHead.next = head;
@@ -82,16 +86,18 @@ public class ReverseLinkedListIi {
             for (int i = 0; i < m-1; i++) {
                 pre = pre.next;
             }
+
+            // i+1 = m;
             ListNode cur = pre.next;
-            ListNode next;
+
+            // 就是把next 插入到pre 和 cur之间
             for (int i = m; i < n; i++) {
-                next = cur.next;
-                // 一直指向下一个node，所以不需要cur = next了
-                cur.next = cur.next.next;
-                // 插入到前面的指向当前头结点
-                next.next = pre.next;
+                ListNode next = cur.next;
+                cur.next = next.next;
+                next.next = cur;
                 pre.next = next;
             }
+
             return preHead.next;
         }
     }
