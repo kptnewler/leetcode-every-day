@@ -21,14 +21,16 @@ public class DailyTemperatures {
     class Solution {
         public int[] dailyTemperatures(int[] temperatures) {
             int[] results = new int[temperatures.length];
-            LinkedList<Integer> stack = new LinkedList<Integer>();
+            LinkedList<Integer> stack = new LinkedList<>();
             for (int i = 0; i < temperatures.length; i++) {
                 while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
-                    int peekIndex = stack.pop();
-                    results[peekIndex] = i - peekIndex;
+                    int popValue = stack.pop();
+                    results[popValue] = i - popValue;
                 }
+
                 stack.push(i);
             }
+
             return results;
         }
     }

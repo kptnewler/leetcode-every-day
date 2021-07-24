@@ -43,10 +43,7 @@ package com.newler.leetcode.stack;
 // Related Topics 栈 字符串
 
 
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class ValidParentheses {
     public static void main(String[] args) {
@@ -57,20 +54,20 @@ public class ValidParentheses {
     static class Solution {
 
         public boolean isValid(String s) {
-
-            Stack<Character> stack = new Stack<>();
             HashMap<Character, Character> hashMap = new HashMap<>(3);
             hashMap.put('(', ')');
             hashMap.put('[', ']');
             hashMap.put('{', '}');
 
+            Stack<Character> stack = new Stack<>();
+
             for (char c : s.toCharArray()) {
                 if (hashMap.containsKey(c)) {
                     stack.push(c);
                 } else {
-                    if (stack.isEmpty() ||  c != hashMap.get(stack.pop())) {
-                        return false;
-                    }
+                  if (stack.isEmpty() || hashMap.get(stack.pop()) != c) {
+                      return false;
+                  }
                 }
             }
 
