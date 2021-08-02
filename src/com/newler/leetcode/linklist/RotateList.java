@@ -31,29 +31,23 @@ public class RotateList {
     class Solution {
         public ListNode rotateRight(ListNode head, int k) {
             if (head == null || head.next == null) return head;
-            int length  = 1;
-            ListNode tmp = head;
-            // 移动到尾节点
-            while (tmp.next != null) {
-                tmp = tmp.next;
-                length++;
+            if (k==0) return head;
+
+            int size = 1;
+            ListNode tail = head, cur = head;
+            while (tail.next != null) {
+                tail = tail.next;
+                size++;
+            }
+            tail.next = head;
+
+            for (int i = 0; i < size -1 - (k % size); i++) {
+                cur = cur.next;
             }
 
-            // 获取需要移动的位置
-            int moveLength = length - k % length;
-            if (moveLength == length) return head;
-            ListNode cur = head, pre = null;
-            // 找到当前移动节点和它前一个节点
-            while (moveLength > 0) {
-                pre = cur;
-                cur = cur.next;
-                moveLength -- ;
-            }
-            if (pre != null) {
-                pre.next = null;
-            }
-            tmp.next = head;
-            return cur;
+            ListNode newHead = cur.next;
+            cur.next = null;
+            return newHead;
         }
     }
 }

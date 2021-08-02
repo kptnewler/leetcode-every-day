@@ -58,31 +58,21 @@ public class RemoveDuplicatesFromSortedListIi {
     static class Solution {
         public ListNode deleteDuplicates(ListNode head) {
             if (head == null || head.next == null) return head;
+            ListNode preHead = new ListNode(Integer.MIN_VALUE);
+            preHead.next = head;
+            ListNode cur = preHead;
 
-            ListNode cur = head, pre = null;
-
-            while (cur != null) {
-                // 继续后探
-                while (cur.next!=null && cur.val == cur.next.val) {
+            while (cur.next != null && cur.next.next != null) {
+                if (cur.next.val == cur.next.next.val) {
+                    int x = cur.next.val;
+                    while (cur.next != null && cur.next.val == x) {
+                        cur.next = cur.next.next;
+                    }
+                } else {
                     cur = cur.next;
                 }
-                // pre不为空，则不是前后节点关系，说明存在重复
-                if (pre!=null && pre.next != cur) {
-                    pre.next = cur.next;
-                    cur = cur.next;
-                    continue;
-                }
-                // pre为空，cur不为head，说明存在重复
-                if (pre == null && cur != head) {
-                    head = cur.next;
-                    pre = null;
-                    cur = head;
-                    continue;
-                }
-                pre = cur;
-                cur = cur.next;
             }
-            return head;
+            return preHead.next;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -51,26 +51,26 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] searchRange(int[] nums, int target) {
-            int l = 0, r = nums.length - 1;
-            int first = -1, second = -1;
-            int[] results = new int[2];
-            Arrays.fill(results, -1);
+            int[] results = {-1,-1};
+            int l = 0, r = nums.length -1;
             while (l <= r) {
-                int mid = l + (r-l) / 2;
+                int mid = l + (r - l)/2;
                 if (target < nums[mid]) {
                     r = mid - 1;
                 } else if (target > nums[mid]) {
                     l = mid + 1;
                 } else {
-                    int tmp = mid;
-                    while (tmp > 0 && nums[tmp - 1] == nums[tmp]) {
-                        tmp --;
+                    int cur = mid;
+                    while (cur > 0 && nums[cur] == nums[cur-1]) {
+                        cur--;
                     }
-                    results[0] = mid;
-                    while (mid < nums.length && nums[mid + 1] == nums[mid]) {
+                    results[0] = cur;
+
+                    while (mid < nums.length-1 && nums[mid] == nums[mid+1]) {
                         mid++;
                     }
                     results[1] = mid;
+                    break;
                 }
             }
             return results;

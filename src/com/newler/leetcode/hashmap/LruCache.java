@@ -58,16 +58,17 @@ package com.newler.leetcode.hashmap;
 // 👍 1274 👎 0
 
 
+import com.sun.jmx.snmp.SnmpOid;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 public class LruCache {
     public static void main(String[] args) {
-        LinkedHashMap lruCache = new LinkedHashMap<Integer, Integer>(2, 0.75f, true);
+        LRUCache lruCache = new LRUCache(2);
         lruCache.put(1,1);
         lruCache.put(2,2);
-        lruCache.get(2);
         lruCache.get(1);
         lruCache.put(3,3);
         lruCache.get(2);
@@ -91,75 +92,76 @@ public class LruCache {
 
         public int get(int key) {
             Node node = hashMap.get(key);
-            int value = -1;
-            if (node != null) {
-                value = node.value;
-                if (node != head) {
-                    // 挪动到头结点
-                    removeNode(node);
-                    addHead(node);
-                }
-            }
-            return value;
+            if (node == null) return -1;
+            moveToHead(node);
+            return node.value;
         }
 
         public void put(int key, int value) {
             if (capacity == 0) return;
-            Node node = hashMap.get(key);
-            // 判断在不在链表中
-            if (node != null) {
 
-                // 在链表中，直接删除旧节点
-                removeNode(node);
-                size--;
+            // 如果键存在
+            if (hashMap.containsKey(key)) {
+                Node node = hashMap.get(key);
+                node.value = value;
+                moveToHead(node);
+                return;
             }
 
-            // 判断有没有满
-            if (size == capacity) {
-                if (tail != null) {
-                    // 满了挪作最后一个
-                    hashMap.remove(tail.key);
-                    removeNode(tail);
-                    size--;
-                }
+            if (capacity == size) {
+                removeNode(tail);
             }
+            Node node = new Node(value, key, null, null);
+            addNode(node);
 
-            // 再插入到头结点
-            Node newNode = new Node(value, key, null, head);
-            addHead(newNode);
-            hashMap.put(key, newNode);
-            size++;
         }
 
+        /**
+         * 相互指向
+         */
         private void removeNode(Node node) {
-            Node next = node.next;
-            Node pre=  node.pre;
-            if (next != null) {
-                next.pre = pre;
+            if (node.pre != null) {
+                node.pre.next = node.next;
             }
 
-            if (pre != null) {
-                pre.next = next;
+            if (node.next != null) {
+                node.next.pre = node.pre;
+            }
+
+            if (node == head) {
+                head = node.next;
             }
 
             if (node == tail) {
-                tail = pre;
+                tail = node.pre;
             }
-            if (node == head) {
-                head = next;
-            }
+            hashMap.remove(node.key);
+
+            size--;
         }
 
-        private void addHead(Node node) {
-            node.pre = null;
-            node.next = head;
+        /**
+         *头插法 插入节点
+         */
+        private void addNode(Node node) {
             if (head != null) {
+                node.next = head;
+                node.pre = null;
                 head.pre = node;
+                head = node;
             }
-            if (tail == null) {
-                tail = node;
+            if (head == null) {
+                head =tail= node;
             }
-            head = node;
+            hashMap.put(node.key, node);
+            size++;
+
+        }
+
+        private void moveToHead(Node node) {
+            if (node == head) return;
+            removeNode(node);
+            addNode(node);
         }
 
         class Node {

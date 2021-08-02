@@ -41,22 +41,22 @@ package com.newler.leetcode.binary;
 public class SearchA2dMatrix {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        // 行index * 列长+列Index
         public boolean searchMatrix(int[][] matrix, int target) {
-            if (matrix.length == 0) return false;
-            int m = matrix.length;
-            int n = matrix[0].length;
-            int left = 0, right = m * n - 1;
-            while (left <= right) {
-                int mid = (left + right) / 2;
-                if (matrix[mid / n][mid % n] < target) {
-                    left = mid + 1;
-                } else if (matrix[mid / n][mid % n] > target) {
-                    right = mid - 1;
-                } else {
-                    return true;
-                }
-            }
-            return false;
+           if (matrix.length == 0)return false;
+           int l = 0, r = matrix.length * matrix[0].length - 1;
+           int rowLength = matrix[0].length;
+           while (l <= r) {
+               int mid =  l + (r-l)/2;
+               if (target < matrix[mid/rowLength][mid%rowLength]) {
+                    r = mid - 1;
+               } else if (target > matrix[mid/rowLength][mid%rowLength]){
+                   l = mid + 1;
+               } else {
+                   return true;
+               }
+           }
+           return false;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

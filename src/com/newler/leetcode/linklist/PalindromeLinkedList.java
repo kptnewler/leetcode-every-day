@@ -26,24 +26,27 @@ public class PalindromeLinkedList {
     class Solution {
         public boolean isPalindrome(ListNode head) {
             ListNode slow = head, fast = head;
-            while (fast!=null &&fast.next !=null) {
+
+            while (fast!=null && fast.next !=null) {
                 slow = slow.next;
                 fast = fast.next.next;
             }
 
-            ListNode cur = slow, pre = null, next;
-            while (cur !=null) {
-                next = cur.next;
+            ListNode pre = null;
+            ListNode cur = slow;
+            while (cur != null) {
+                ListNode next =cur.next;
                 cur.next = pre;
                 pre = cur;
                 cur = next;
             }
 
-            ListNode l = head, r = pre;
-            while (r != null) {
-                if (l.val != r.val) return false;
-                l = l.next;
-                r = r.next;
+            ListNode l1 = head;
+            ListNode l2 = pre;
+            while (l2 != null && l1 != null) {
+                if (l2.val != l1.val) return false;
+                l1 = l1.next;
+                l2 = l2.next;
             }
 
             return true;

@@ -73,12 +73,11 @@ public class Subsets {
         }
 
         public void backtrack(int cur, int[] nums, List<Integer> paths) {
-            // 没有限制每一层都要
-            results.add(new ArrayList<>(paths));
+            results.add(new ArrayList<Integer>(paths));
             for (int i = cur; i < nums.length; i++) {
                 paths.add(nums[i]);
                 backtrack(i+1, nums, paths);
-                paths.remove(paths.size() - 1);
+                paths.remove(paths.size() -1);
             }
         }
     }
