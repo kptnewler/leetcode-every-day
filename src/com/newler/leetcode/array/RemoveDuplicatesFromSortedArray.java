@@ -56,15 +56,20 @@ public class RemoveDuplicatesFromSortedArray {
     }
     static class Solution {
         public int removeDuplicates(int[] nums) {
-            int i = 1, j = 0;
-            while (i < nums.length) {
-                if (nums[i] != nums[j]) {
-                    nums[++j] = nums[i];
+            int fast, slow;
+            for (slow = 0, fast = 1; fast < nums.length; fast++) {
+                // 如果两者不重复
+                // slow在第一个重复数上，fast在不重复数上
+                // 第一个重复数不能被覆盖所以先++
+                if (nums[fast] != nums[fast-1]) {
+                    nums[++slow] = nums[fast];
                 }
-                i++;
             }
-            return j+1;
+            // [slow,fast]如果都没重复 fast = 1 + 1 = 2
+            return slow+1;
         }
     }
+
+
 }
 
