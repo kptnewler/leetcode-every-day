@@ -43,11 +43,12 @@ package com.newler.leetcode.desgin;
 // Related Topics 堆 设计 哈希表
 
 
-import javafx.geometry.Pos;
 
 import java.util.*;
 
-import static java.lang.System.*;
+import static java.lang.System.nanoTime;
+import static java.lang.System.out;
+
 
 public class DesignTwitter {
     public static void main(String[] args) {
