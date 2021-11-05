@@ -50,30 +50,30 @@ public class LongestPalindromicSubstring {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String longestPalindrome(String s) {
-            if (s==null || s.length() == 0) return "";
-            if (s.length() == 1) return s;
-            int start = 0, end = 0;
-
+            String result = "";
             for (int i = 0; i < s.length(); i++) {
-                int len1 = getPalindromicStringLength(i, i, s);
-                int len2 = getPalindromicStringLength(i, i+1, s);
-                int len = Math.max(len1, len2);
-                if (len >= end - start + 1) {
-                    // 偶数，比如中心i = 2，长度为6,  2 - (6-1)/2= 0,
-                    start = i - (len-1)/2;
-                    end = i + len/2;
-                }
+                // 奇数回文子串
+                String pOdd = getPalindrome(s, i, i);
+                // 偶数回文子串
+                String pEven = getPalindrome(s, i, i+1);
+
+                // 取最长回文子串
+                result = pEven.length() > result.length() ? pEven : result;
+                result = pOdd.length() > result.length() ? pOdd : result;
             }
-            return s.substring(start, end+1);
+            return result;
         }
 
-        public int getPalindromicStringLength(int l, int r, String s) {
+        public String getPalindrome(String s, int l, int r) {
+            // 像两边扩散
             while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
                 l--;
                 r++;
             }
 
-            return r-l-1;
+            // l被多-1了，r被多加1，比如截取回文串为【1.5】，当下为【0，6】
+            // sub截取字符串范围是【start, end）
+            return s.substring(l+1, r);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -57,14 +57,11 @@ public class MoveZeroes {
          * 高明的方法，双指针，当num[i]不为0时，赋值给j，num[i]置为0，依次将不为0的值往前挪动。
          */
         public void moveZeroes(int[] nums) {
-            int j = 0;
-            for (int i = 0; i < nums.length; i++) {
-                if (nums[i] != 0) {
-                    if (i != j) {
-                        nums[j] = nums[i];
-                        nums[i] = 0;
-                    }
-                    j++;
+            int slow = 0, fast = 1;
+            for (; fast < nums.length; fast++) {
+                if (nums[fast] != 0) {
+                    nums[slow++] = nums[fast];
+                    nums[fast] = 0;
                 }
             }
         }
