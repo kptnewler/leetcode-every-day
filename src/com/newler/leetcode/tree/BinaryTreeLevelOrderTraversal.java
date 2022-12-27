@@ -28,7 +28,6 @@ package com.newler.leetcode.tree;
 
 import com.newler.leetcode.data.TreeNode;
 import com.newler.leetcode.utils.TreeUtils;
-import jdk.nashorn.internal.ir.ThrowNode;
 
 import java.util.*;
 
